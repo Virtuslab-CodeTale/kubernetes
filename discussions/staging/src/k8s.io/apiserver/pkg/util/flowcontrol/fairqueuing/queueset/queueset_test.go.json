@@ -196,5 +196,104 @@
     "commit" : "c7b098ac6c276d65a79db6cfeb04f5f0f86eb315",
     "line" : 40,
     "diffHunk" : "@@ -1,1 +74,78 @@\t\tintegrators[i] = test.NewIntegrator(clk)\n\t\tfsName := fmt.Sprintf(\"client%d\", i)\n\t\texpectedInqueue = expectedInqueue + fmt.Sprintf(`\t\t\t\tapiserver_flowcontrol_current_inqueue_requests{flowSchema=%q,priorityLevel=%q} 0%s`, fsName, name, \"\\n\")\n\t\tfor j := 0; j < uc.nThreads; j++ {\n\t\t\tcounter.Add(1)"
+  },
+  {
+    "id" : "1f52de21-87fb-4c10-9d50-0f0d23c58334",
+    "prId" : 103240,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103240#pullrequestreview-728222674",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "c96534c9-002e-4406-8bfc-262b439a6a42",
+        "parentId" : null,
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "And following on @MikeSpreitzer comment, you can also check time now - it should be now+additional_latency at this point",
+        "createdAt" : "2021-08-12T06:34:08Z",
+        "updatedAt" : "2021-08-12T06:34:32Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "d68186452d9150b113489e6a722caf82f898857f",
+    "line" : 60,
+    "diffHunk" : "@@ -1,1 +1050,1054 @@\t\t\t// as soon as AdditionalLatency elapses we expect the seats to be released\n\t\t\tclk.SetTime(now.Add(test.workEstimate.AdditionalLatency))\n\n\t\t\tif queuesetTotalRequestsExecutingExpected != qs.totRequestsExecuting {\n\t\t\t\tt.Errorf(\"Expected total requests executing: %d, but got: %d\", queuesetTotalRequestsExecutingExpected, qs.totRequestsExecuting)"
+  },
+  {
+    "id" : "4c4f2ca0-cdd8-4843-a9e8-9cf8d23db513",
+    "prId" : 103240,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103240#pullrequestreview-728815299",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "38483bd0-3d57-46a8-a9af-0f4bcd2c515b",
+        "parentId" : null,
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "Why not run clk.Run(nil)\r\n\r\n[but then Mike`s comment about proper initialization of QS is a valid one]",
+        "createdAt" : "2021-08-12T14:12:26Z",
+        "updatedAt" : "2021-08-12T14:16:05Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "d0f79ac9-6f52-4c00-9998-a6ca363526d2",
+        "parentId" : "38483bd0-3d57-46a8-a9af-0f4bcd2c515b",
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "> Why not run clk.Run(nil)\r\n\r\n@wojtek-t for the test at hand, `clk.SetTime` is more concise in expressing the expectation that the event function should be executed immediately after `AdditionalLatency` elapses. So this is a verification step.\r\n\r\nAlternatively, we can achieve this with `clk.Run(nil)` too:\r\n```\r\nclk.Run(nil)\r\nget the time when the event fired and assert that it happened after AdditionalLatency elapsed\r\n```\r\n\r\nI think `SetTime` does the job concisely, thoughts?",
+        "createdAt" : "2021-08-12T14:54:57Z",
+        "updatedAt" : "2021-08-12T14:54:58Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "7e677fcc-1e42-4a42-867d-73122c208729",
+        "parentId" : "38483bd0-3d57-46a8-a9af-0f4bcd2c515b",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "In my opinion, using `SetTime` to the precise time needed is sufficient for a test of `finishRequestLocked`.  Using `clk.Run(nil)` would also be OK, and adding a test that `Run` advanced the fake time to the exact correct value would be better.",
+        "createdAt" : "2021-08-12T16:08:36Z",
+        "updatedAt" : "2021-08-12T16:08:36Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "d68186452d9150b113489e6a722caf82f898857f",
+    "line" : 59,
+    "diffHunk" : "@@ -1,1 +1049,1053 @@\n\t\t\t// as soon as AdditionalLatency elapses we expect the seats to be released\n\t\t\tclk.SetTime(now.Add(test.workEstimate.AdditionalLatency))\n\n\t\t\tif queuesetTotalRequestsExecutingExpected != qs.totRequestsExecuting {"
+  },
+  {
+    "id" : "a3b19388-1bd7-4665-ae86-564475f95ca8",
+    "prId" : 103240,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103240#pullrequestreview-729621092",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "4d2d9715-c029-4363-af3d-0ed92d9e6e6e",
+        "parentId" : null,
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "If we really want to lock down the behavior of `finishRequestLocked`, we could also check the values one nanosecond before the proper release time.",
+        "createdAt" : "2021-08-13T01:50:30Z",
+        "updatedAt" : "2021-08-13T01:50:30Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "a19332de-4194-431b-96b2-a4ab12edb79a",
+        "parentId" : "4d2d9715-c029-4363-af3d-0ed92d9e6e6e",
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "Yes, I will update the test to assert on this. ",
+        "createdAt" : "2021-08-13T13:32:52Z",
+        "updatedAt" : "2021-08-13T13:32:53Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "d68186452d9150b113489e6a722caf82f898857f",
+    "line" : 58,
+    "diffHunk" : "@@ -1,1 +1048,1052 @@\t\t\tqs.finishRequestLocked(r)\n\n\t\t\t// as soon as AdditionalLatency elapses we expect the seats to be released\n\t\t\tclk.SetTime(now.Add(test.workEstimate.AdditionalLatency))\n"
   }
 ]

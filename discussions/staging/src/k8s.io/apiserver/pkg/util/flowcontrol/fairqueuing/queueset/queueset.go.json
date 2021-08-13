@@ -1010,5 +1010,60 @@
     "commit" : "dcb298c9552de44e27ed52f5e2b58a0dd7cd8d54",
     "line" : 19,
     "diffHunk" : "@@ -1,1 +40,44 @@\t// See https://kubernetes.slack.com/archives/C0EG7JC6T/p1626985671458800?thread_ts=1626983387.450800&cid=C0EG7JC6T\n\t// The need for this hack will be removed when we make queueset use an EventClock rather than a PassiveClock.\n\t_ \"k8s.io/utils/clock/testing\"\n)\n"
+  },
+  {
+    "id" : "b87f3dfa-f206-428a-a089-401b46fc293e",
+    "prId" : 103240,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103240#pullrequestreview-726724520",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "817d8a3d-a255-4c38-af59-eb936923d2f2",
+        "parentId" : null,
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "This could be a method of `*queueSet`.  It _might_ be more efficient if we wrote it that way, depending on compiler smarts; it would be a miniscule difference at most.  I am OK with leaving it here for the sake of code locality.  I am OK with moving it out.",
+        "createdAt" : "2021-08-10T18:41:23Z",
+        "updatedAt" : "2021-08-10T18:41:24Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "d68186452d9150b113489e6a722caf82f898857f",
+    "line" : 13,
+    "diffHunk" : "@@ -1,1 +783,787 @@\t// TODO: for now we keep the logic localized so it is easier to see\n\t//  how the counters are tracked for queueset and queue, in future we\n\t//  can refactor to move this function.\n\treleaseSeatsLocked := func() {\n\t\tdefer qs.removeQueueIfEmptyLocked(r)"
+  },
+  {
+    "id" : "f5328329-78d9-4e4b-9273-5d7794776e88",
+    "prId" : 103240,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103240#pullrequestreview-729620761",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "0003b96b-a684-4f26-bd27-b15c96aa282d",
+        "parentId" : null,
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "I do not understand why local copy of this value is being created here.  As far as i can tell, it is harmless but not helpful.",
+        "createdAt" : "2021-08-13T01:51:33Z",
+        "updatedAt" : "2021-08-13T01:51:34Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "d1c5fadb-9394-4489-bdd4-720370a5d878",
+        "parentId" : "0003b96b-a684-4f26-bd27-b15c96aa282d",
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "`r` represents request scoped data and should not be accessed from another active goroutine, but just to be on the safe side i made a copy here. ",
+        "createdAt" : "2021-08-13T13:32:31Z",
+        "updatedAt" : "2021-08-13T13:32:32Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "d68186452d9150b113489e6a722caf82f898857f",
+    "line" : 37,
+    "diffHunk" : "@@ -1,1 +807,811 @@\t\t}\n\n\t\tadditionalLatency := r.workEstimate.AdditionalLatency\n\t\t// EventAfterDuration will execute the event func in a new goroutine,\n\t\t// so the seats allocated to this request will be released after"
   }
 ]
