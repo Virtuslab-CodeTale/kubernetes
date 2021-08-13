@@ -1318,5 +1318,49 @@
     "commit" : "5b426818404c9b09aed4fe187ec310807b197eee",
     "line" : 21,
     "diffHunk" : "@@ -1,1 +492,496 @@\t\t\t}\n\t\tcase <-ctx.Done():\n\t\t\tt.Stop()\n\t\t\tklog.Error(log(\"%s timeout after %v [volume=%v; attachment.ID=%v]\", operation, timeout, volumeHandle, attachID))\n\t\t\treturn fmt.Errorf(\"%s timeout for volume %v\", operation, volumeHandle)"
+  },
+  {
+    "id" : "91e4f215-113e-488c-9c39-bd0011dd8bb1",
+    "prId" : 101475,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/101475#pullrequestreview-716363419",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "e04830f8-0cf8-435f-a27f-6fc13475c1c4",
+        "parentId" : null,
+        "authorId" : "06a18a1b-6ca5-44b8-9cdc-5bb944ae4e29",
+        "body" : "We don't have to drain the timer's channel because the backoff manager is private to this function.",
+        "createdAt" : "2021-04-26T05:15:49Z",
+        "updatedAt" : "2021-04-26T05:17:47Z",
+        "lastEditedBy" : "06a18a1b-6ca5-44b8-9cdc-5bb944ae4e29",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "12ef3098-7e0f-4708-b754-05f225e8d9ce",
+        "parentId" : "e04830f8-0cf8-435f-a27f-6fc13475c1c4",
+        "authorId" : "d4f34d8f-5341-4ac1-b8b2-5e5f11e23a5d",
+        "body" : "the `<-t.C()` case can return, do we need to call `t.Stop()` if it does?",
+        "createdAt" : "2021-07-27T17:55:12Z",
+        "updatedAt" : "2021-07-27T18:32:53Z",
+        "lastEditedBy" : "d4f34d8f-5341-4ac1-b8b2-5e5f11e23a5d",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "0b5a43e5-8f53-40dc-a5da-5ab48a8f3f39",
+        "parentId" : "e04830f8-0cf8-435f-a27f-6fc13475c1c4",
+        "authorId" : "06a18a1b-6ca5-44b8-9cdc-5bb944ae4e29",
+        "body" : "No, it's a `Timer` (not a `Ticker`), it fires once and there is no need to stop it after that.",
+        "createdAt" : "2021-07-27T20:47:22Z",
+        "updatedAt" : "2021-07-27T20:47:22Z",
+        "lastEditedBy" : "06a18a1b-6ca5-44b8-9cdc-5bb944ae4e29",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "5b426818404c9b09aed4fe187ec310807b197eee",
+    "line" : 21,
+    "diffHunk" : "@@ -1,1 +492,496 @@\t\t\t}\n\t\tcase <-ctx.Done():\n\t\t\tt.Stop()\n\t\t\tklog.Error(log(\"%s timeout after %v [volume=%v; attachment.ID=%v]\", operation, timeout, volumeHandle, attachID))\n\t\t\treturn fmt.Errorf(\"%s timeout for volume %v\", operation, volumeHandle)"
   }
 ]

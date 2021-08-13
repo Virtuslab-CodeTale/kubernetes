@@ -295,5 +295,27 @@
     "commit" : "5b426818404c9b09aed4fe187ec310807b197eee",
     "line" : 6,
     "diffHunk" : "@@ -1,1 +169,173 @@\t\t\tif !t.Stop() {\n\t\t\t\t<-t.C()\n\t\t\t}\n\t\t\treturn\n\t\tcase <-t.C():"
+  },
+  {
+    "id" : "9f52c390-d2b7-40fd-a394-5534dc96d416",
+    "prId" : 101475,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/101475#pullrequestreview-644270150",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "30480afc-5ee0-4624-9bcf-407d6db30ec6",
+        "parentId" : null,
+        "authorId" : "06a18a1b-6ca5-44b8-9cdc-5bb944ae4e29",
+        "body" : "Backoff manager was provided to this function so it must stop and drain the timer's channel here, otherwise the owner of the manager cannot reuse it. Even if the owner didn't care, stopping the timer earlier releases some resources so is beneficial.",
+        "createdAt" : "2021-04-26T05:16:49Z",
+        "updatedAt" : "2021-04-26T05:17:47Z",
+        "lastEditedBy" : "06a18a1b-6ca5-44b8-9cdc-5bb944ae4e29",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "5b426818404c9b09aed4fe187ec310807b197eee",
+    "line" : 6,
+    "diffHunk" : "@@ -1,1 +169,173 @@\t\t\tif !t.Stop() {\n\t\t\t\t<-t.C()\n\t\t\t}\n\t\t\treturn\n\t\tcase <-t.C():"
   }
 ]

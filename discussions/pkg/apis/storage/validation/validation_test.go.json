@@ -328,5 +328,38 @@
     "commit" : "e5cf6f5c71cfc7dc0fd5b34c27ea45b1ab922d41",
     "line" : 32,
     "diffHunk" : "@@ -1,1 +673,677 @@\t}\n\n\ttopologyDupKeys := []api.TopologySelectorTerm{\n\t\t{\n\t\t\tMatchLabelExpressions: []api.TopologySelectorLabelRequirement{"
+  },
+  {
+    "id" : "6d1c9db9-4410-404a-af09-69d088353672",
+    "prId" : 101789,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/101789#pullrequestreview-725639725",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "b078bad8-5ce0-4247-a392-47ddd26c21bc",
+        "parentId" : null,
+        "authorId" : "8be927c4-cfb4-4077-b355-f4f3d84849b8",
+        "body" : "add a test for changing storage capacity to an invalid value and make sure it fails (it looks like `nil` with CSIStorageCapacity enabled is invalid, even though we don't expect to ever encounter that because the field is defaulted to false if the feature is enabled)",
+        "createdAt" : "2021-08-05T15:18:38Z",
+        "updatedAt" : "2021-08-05T15:18:38Z",
+        "lastEditedBy" : "8be927c4-cfb4-4077-b355-f4f3d84849b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "6cf57fbb-7d92-4d85-925c-41db094e3db5",
+        "parentId" : "b078bad8-5ce0-4247-a392-47ddd26c21bc",
+        "authorId" : "ba0b9c6e-ec4c-4d1b-832e-751e6109bf38",
+        "body" : "Added. To make it work, I had to add a call to `validateCSIDriverSpec` in `ValidateCSIDriverUpdate`. That wasn't necessary before when all fields were immutable but now is good to have, albeit a bit redundant because there is not much that is going to be caught by it. As you said, nil should not occur in practice.",
+        "createdAt" : "2021-08-09T17:33:42Z",
+        "updatedAt" : "2021-08-09T17:33:43Z",
+        "lastEditedBy" : "ba0b9c6e-ec4c-4d1b-832e-751e6109bf38",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "11ed96baf57d7f9f96e133ec3ba1c1d9541e9d60",
+    "line" : 15,
+    "diffHunk" : "@@ -1,1 +2067,2071 @@\t\t\t\tnew.Spec.FSGroupPolicy = &fileFSGroupPolicy\n\t\t\t},\n\t\t},\n\t\t{\n\t\t\tname: \"TokenRequests invalidated\","
   }
 ]
