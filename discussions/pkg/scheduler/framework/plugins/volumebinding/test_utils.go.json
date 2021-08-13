@@ -1,0 +1,24 @@
+[
+  {
+    "id" : "02d51f0c-1e15-4738-a91e-8c60f74982a2",
+    "prId" : 103072,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103072#pullrequestreview-726742352",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "45bbea4b-b3da-47cf-a06b-3c7497995b75",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "I would just remove the prefix `with` to reduce line length. But this is a nit.",
+        "createdAt" : "2021-08-10T19:00:49Z",
+        "updatedAt" : "2021-08-10T19:00:53Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "29bd66d0189ca0a6db21cae66a6a5e8995d9aaf3",
+    "line" : 158,
+    "diffHunk" : "@@ -1,1 +156,160 @@}\n\nfunc (pb podBuilder) withNamespace(name string) podBuilder {\n\tpb.Pod.ObjectMeta.Namespace = name\n\treturn pb"
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "id" : "9d23ee0b-283c-4301-9ba5-33a0ba4fbefc",
+    "prId" : 103072,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103072#pullrequestreview-724527385",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "3eb5db03-1869-4e53-b8c6-591346de0e00",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "Could you re-evaluate which types in this file need to be exported?\r\n\r\nI suspect most of them don't need to be anymore. But you can leave that to a follow up PR.",
+        "createdAt" : "2021-08-04T13:56:34Z",
+        "updatedAt" : "2021-08-04T13:56:41Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "1805b73c-9127-4855-b81b-60e781d6ba32",
+        "parentId" : "3eb5db03-1869-4e53-b8c6-591346de0e00",
+        "authorId" : "737e6f8b-a6c5-423b-bc22-03f745750689",
+        "body" : "Let it be a follow up PR.  There are some inputs:\r\n```\r\npackage volumebinding // import \"k8s.io/kubernetes/pkg/scheduler/framework/plugins/volumebinding\"\r\n\r\nCONSTANTS\r\n\r\nconst ErrReasonBindConflict ConflictReason  - used in k8s.io/kubernetes packages\r\nconst ErrReasonNodeConflict ConflictReason  - used in k8s.io/kubernetes packages\r\nconst ErrReasonNotEnoughSpace string        - used only in current package (with this patch)\r\nconst ErrReasonPVNotExist string            - used only in current package\r\nconst DefaultBindTimeoutSeconds string      - Not used in k/k project\r\n)\r\n\r\nTYPES\r\n\r\ntype AssumeCache interface                      - used only in current package\r\nfunc NewAssumeCache(...) AssumeCache            - used only in current package\r\ntype BindingInfo struct {}                      - used only in current package\r\ntype CapacityCheck struct {}                    - used only in current package\r\ntype ConflictReason string                      - used only in current package\r\ntype ConflictReasons []ConflictReason           - used in k8s.io/kubernetes packages\r\ntype FakeVolumeBinder struct {}                 - used only in current package\r\nfunc NewFakeVolumeBinder(...) *FakeVolumeBinder - used in k8s.io/kubernetes packages\r\ntype FakeVolumeBinderConfig struct {}           - used in k8s.io/kubernetes packages\r\ntype PVAssumeCache interface {}                 - used only in current package\r\nfunc NewPVAssumeCache(...) PVAssumeCache        - used only in current package\r\ntype PVCAssumeCache interface {}                - used only in current package\r\nfunc NewPVCAssumeCache(...) PVCAssumeCache      - used only in current package\r\ntype PodVolumes struct {}                       - used only in current package\r\ntype SchedulerVolumeBinder interface {}         - used in k8s.io/kubernetes packages\r\nfunc NewVolumeBinder(...) SchedulerVolumeBinder - used only in current package\r\ntype StorageResource struct {}                  - used only in current package\r\ntype VolumeBinding struct {}                    - used in k8s.io/kubernetes packages\r\ntype InTreeToCSITranslator interface {}         - used only in current package\r\n```",
+        "createdAt" : "2021-08-06T16:30:28Z",
+        "updatedAt" : "2021-08-06T16:30:28Z",
+        "lastEditedBy" : "737e6f8b-a6c5-423b-bc22-03f745750689",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "29bd66d0189ca0a6db21cae66a6a5e8995d9aaf3",
+    "line" : 16,
+    "diffHunk" : "@@ -1,1 +49,53 @@\t\"k8s.io/kubernetes/pkg/features\"\n\t\"k8s.io/kubernetes/pkg/scheduler/framework/plugins/volumebinding/metrics\"\n\tvolumeutil \"k8s.io/kubernetes/pkg/volume/util\"\n)\n"
+  }
+]

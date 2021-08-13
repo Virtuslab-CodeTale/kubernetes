@@ -526,5 +526,60 @@
     "commit" : "aa23ed53c2f285b2f7c74e8344d29008580a9e86",
     "line" : 12,
     "diffHunk" : "@@ -1,1 +194,198 @@\t}\n\n\terr := validation.ValidatePathNoBacksteps(m.globalPath)\n\tif err != nil {\n\t\treturn fmt.Errorf(\"invalid path: %s %v\", m.globalPath, err)"
+  },
+  {
+    "id" : "abb7e2cb-6ff1-4176-9956-c9456a6642b8",
+    "prId" : 102886,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/102886#pullrequestreview-692347833",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "c630bd04-d697-4f8a-a2d2-c27b3d1fe972",
+        "parentId" : null,
+        "authorId" : "209ee091-cf29-4efa-8a1b-a98334ea3f9a",
+        "body" : "can we add an e2e test for this? We have some tests that create a tmp device.",
+        "createdAt" : "2021-06-25T00:48:35Z",
+        "updatedAt" : "2021-06-25T00:49:02Z",
+        "lastEditedBy" : "209ee091-cf29-4efa-8a1b-a98334ea3f9a",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "593eda4ad343bbe3acd8946bae962b3407ef3feb",
+    "line" : 38,
+    "diffHunk" : "@@ -1,1 +404,408 @@\n\tswitch fileType {\n\tcase hostutil.FileTypeBlockDev:\n\t\t_, err = util.GenericResizeFS(plugin.host, plugin.GetPluginName(), localDevicePath, resizeOptions.DeviceMountPath)\n\t\tif err != nil {"
+  },
+  {
+    "id" : "ba943386-283f-4d1f-8bae-d9958cabef27",
+    "prId" : 102886,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/102886#pullrequestreview-728910321",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "8bcd48d4-fdc3-49d5-a930-aa5f785a67fe",
+        "parentId" : null,
+        "authorId" : "209ee091-cf29-4efa-8a1b-a98334ea3f9a",
+        "body" : "Is it possible to unit test or e2e test this condition as well?",
+        "createdAt" : "2021-08-10T20:21:54Z",
+        "updatedAt" : "2021-08-10T20:21:58Z",
+        "lastEditedBy" : "209ee091-cf29-4efa-8a1b-a98334ea3f9a",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "37942545-41d6-44ab-8a61-f6960560ed0f",
+        "parentId" : "8bcd48d4-fdc3-49d5-a930-aa5f785a67fe",
+        "authorId" : "d3e684d7-edd2-4290-a8bf-e8b698c97338",
+        "body" : "done.",
+        "createdAt" : "2021-08-12T17:48:00Z",
+        "updatedAt" : "2021-08-12T17:48:00Z",
+        "lastEditedBy" : "d3e684d7-edd2-4290-a8bf-e8b698c97338",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "593eda4ad343bbe3acd8946bae962b3407ef3feb",
+    "line" : 44,
+    "diffHunk" : "@@ -1,1 +410,414 @@\t\t}\n\t\treturn true, nil\n\tcase hostutil.FileTypeDirectory:\n\t\t// if the given local volume path is of already filesystem directory, return directly because\n\t\t// we do not want to prevent mount operation from succeeding."
   }
 ]

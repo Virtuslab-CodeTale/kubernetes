@@ -1,0 +1,57 @@
+[
+  {
+    "id" : "1ef93ba3-6f7d-47cd-bcfa-e78cb32d7eb3",
+    "prId" : 103072,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103072#pullrequestreview-722305187",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "40052eda-f896-41d1-ab37-c04ed2532687",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "@Huang-Wei what are your thoughts on this?\r\n\r\nAnother option is to create folder within `plugins/volumebinding` which is completely owned by sig storage, but the parent folder is still owned by sig-scheduling. But perhaps that's overkill.",
+        "createdAt" : "2021-07-23T13:39:09Z",
+        "updatedAt" : "2021-07-23T13:39:09Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "985bb6c1-9ae0-498f-a411-31a3ee934797",
+        "parentId" : "40052eda-f896-41d1-ab37-c04ed2532687",
+        "authorId" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "body" : "Probably overkill if the only benefit is to enforce separating the responsibility of reviewing/ownership. In practice, we usually request cofyc or msau42 to take a look if we're not 100% sure of changes in this folder, which works great so far :)",
+        "createdAt" : "2021-08-02T22:29:19Z",
+        "updatedAt" : "2021-08-03T00:26:43Z",
+        "lastEditedBy" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "5d112cbd-5469-487e-a998-72ec30d14907",
+        "parentId" : "40052eda-f896-41d1-ab37-c04ed2532687",
+        "authorId" : "737e6f8b-a6c5-423b-bc22-03f745750689",
+        "body" : "It is still not clear for me. We need remove this file to return ownership to sig-scheduling or we need to do something like this:\r\n```\r\napprovers:\r\n- sig-scheduling-maintainers\r\nreviewers:\r\n- sig-scheduling\r\n- cofyc\r\n- msau42\r\n- lichuqiang\r\n```\r\n(leave original reviewers \r\nhttps://github.com/kubernetes/kubernetes/blob/9ff3b7e744b34c099c1405d9add192adbef0b6b1/pkg/controller/volume/scheduling/OWNERS)\r\n\r\nWDYT @Huang-Wei ?",
+        "createdAt" : "2021-08-04T08:21:03Z",
+        "updatedAt" : "2021-08-04T08:21:03Z",
+        "lastEditedBy" : "737e6f8b-a6c5-423b-bc22-03f745750689",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "216d6640-4815-4f9d-924e-f8a1aa03b035",
+        "parentId" : "40052eda-f896-41d1-ab37-c04ed2532687",
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "You can leave it like this",
+        "createdAt" : "2021-08-04T13:46:57Z",
+        "updatedAt" : "2021-08-04T13:56:41Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "29bd66d0189ca0a6db21cae66a6a5e8995d9aaf3",
+    "line" : 3,
+    "diffHunk" : "@@ -1,1 +1,5 @@# See the OWNERS docs at https://go.k8s.io/owners\n\napprovers:\n- sig-storage-approvers\n- cofyc"
+  }
+]

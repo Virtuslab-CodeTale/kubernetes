@@ -53,5 +53,82 @@
     "commit" : "d30b14d5866eb6a16753530c63deab6820a32edf",
     "line" : 46,
     "diffHunk" : "@@ -1,1 +73,77 @@\t\tName:  \"download-certs\",\n\t\tShort: fmt.Sprintf(\"Download certificates from %s\", kubeadmconstants.KubeadmCertsSecret),\n\t\tLong:  cmdutil.MacroCommandLongDescription,\n\t\tRun:   runControlPlanePrepareDownloadCertsPhaseLocal,\n\t\tInheritFlags: []string{"
+  },
+  {
+    "id" : "ed432ef9-a36d-4390-85b1-cfd982fa51d1",
+    "prId" : 103027,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103027#pullrequestreview-691013210",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "e6a9fbb5-f8df-4b95-9b73-790e14c0628c",
+        "parentId" : null,
+        "authorId" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "body" : "but during dryrun the directory where the certs were written is now data.CertificateWriteDir().\r\nare you getting errors if this is not added here?\r\n\r\n[1]",
+        "createdAt" : "2021-06-21T16:23:39Z",
+        "updatedAt" : "2021-06-21T16:24:12Z",
+        "lastEditedBy" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "1028632b-c6c7-43e3-99b9-313faf702850",
+        "parentId" : "e6a9fbb5-f8df-4b95-9b73-790e14c0628c",
+        "authorId" : "9f89d32c-618e-430a-9597-be8c8d6db75e",
+        "body" : "It won't get errors here, but if I don't change it, it will write tmp cert dir path to static pod yaml instead of \"/etc/kubernetes/pki/\". \r\nAnd If I remake [CreateStaticPodFiles()](https://github.com/kubernetes/kubernetes/blob/f4e7828674d1526f2b04def99c20242f1548c2d8/cmd/kubeadm/app/phases/controlplane/manifests.go#L95) to accept path directly, [GetStaticPodSpecs](https://github.com/kubernetes/kubernetes/blob/f4e7828674d1526f2b04def99c20242f1548c2d8/cmd/kubeadm/app/phases/controlplane/manifests.go#L49) need to do the same and other places that use them. \r\nany suggestion? @neolit123 ",
+        "createdAt" : "2021-06-22T06:53:04Z",
+        "updatedAt" : "2021-06-22T06:53:04Z",
+        "lastEditedBy" : "9f89d32c-618e-430a-9597-be8c8d6db75e",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "23e2fcf9-4381-4ee8-9df7-6036da65c33e",
+        "parentId" : "e6a9fbb5-f8df-4b95-9b73-790e14c0628c",
+        "authorId" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "body" : "making these functions accept a directory seems like a good idea for dry-run / testing?\r\n...that likely is going to make this change a lot bigger though.",
+        "createdAt" : "2021-06-23T18:29:07Z",
+        "updatedAt" : "2021-06-23T18:34:47Z",
+        "lastEditedBy" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "95e000fd6575ae7e697417e2b18bf3f6ad68613b",
+    "line" : 18,
+    "diffHunk" : "@@ -1,1 +196,200 @@\tif data.DryRun() {\n\t\tcfg.CertificatesDir = filepath.Join(kubeadmconstants.KubernetesDir, kubeadmconstants.DefaultCertificateDir)\n\t}\n\n\tfor _, component := range kubeadmconstants.ControlPlaneComponents {"
+  },
+  {
+    "id" : "1425bec0-8d3c-4910-a67e-100c2ccb508c",
+    "prId" : 103027,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103027#pullrequestreview-689108153",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "05578c28-388c-4c1c-a0ec-947dae0b5be2",
+        "parentId" : null,
+        "authorId" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "body" : "related question to [1]",
+        "createdAt" : "2021-06-21T16:24:25Z",
+        "updatedAt" : "2021-06-21T16:24:42Z",
+        "lastEditedBy" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "98af0f02-03a5-4ff7-8302-29b1e1f4a0a3",
+        "parentId" : "05578c28-388c-4c1c-a0ec-947dae0b5be2",
+        "authorId" : "9f89d32c-618e-430a-9597-be8c8d6db75e",
+        "body" : "Actually, it's very tricky to set CertificatesDir during the whole dry-run process. \r\nFirst, I need to download certs to the right tmp dir but I can't pass data.CertificateWriteDir() to [copycerts.DownloadCerts](https://github.com/kubernetes/kubernetes/blob/ea0764452222146c47ec826977f49d7001b0ea8c/cmd/kubeadm/app/phases/copycerts/copycerts.go#L218) and [certsphase.CreatePKIAssets](https://github.com/kubernetes/kubernetes/blob/ea0764452222146c47ec826977f49d7001b0ea8c/cmd/kubeadm/app/phases/certs/certs.go#L44) directly. And remake the args of those two func will be a big work.\r\nThen, when it comes to [CreateStaticPodFiles()](https://github.com/kubernetes/kubernetes/blob/ea0764452222146c47ec826977f49d7001b0ea8c/cmd/kubeadm/app/phases/controlplane/manifests.go#L94), CertificatesDir should be set as \"/etc/kubernetes/pki\" cause it will be written into static pod yaml and printed later, so I change it again\r\n",
+        "createdAt" : "2021-06-22T06:33:55Z",
+        "updatedAt" : "2021-06-22T06:33:55Z",
+        "lastEditedBy" : "9f89d32c-618e-430a-9597-be8c8d6db75e",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "95e000fd6575ae7e697417e2b18bf3f6ad68613b",
+    "line" : 42,
+    "diffHunk" : "@@ -1,1 +234,238 @@\tif data.DryRun() {\n\t\tcfg.CertificatesDir = data.CertificateWriteDir()\n\t}\n\n\tclient, err := bootstrapClient(data)"
   }
 ]

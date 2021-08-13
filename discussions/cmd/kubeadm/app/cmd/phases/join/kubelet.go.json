@@ -20,5 +20,38 @@
     "commit" : "431fd630ffd7af45262a60775d328a8b64fb7d9f",
     "line" : 5,
     "diffHunk" : "@@ -1,1 +148,152 @@\n\t// Try to start the kubelet service in case it's inactive\n\tfmt.Println(\"[kubelet-start] Starting the kubelet\")\n\tkubeletphase.TryStartKubelet()\n"
+  },
+  {
+    "id" : "ecf2c536-51d0-4e25-ba8d-22004cc46f8b",
+    "prId" : 103027,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103027#pullrequestreview-689078698",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "c804c354-e397-4c95-9f5f-9cbd533b836d",
+        "parentId" : null,
+        "authorId" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "body" : "for dryrun==true, we should mention what would happen.\r\n\r\n```\r\nfmt.Println(\"[dryrun] Would stop the kubelet\")\r\n```\r\n",
+        "createdAt" : "2021-06-21T16:31:03Z",
+        "updatedAt" : "2021-06-21T16:31:03Z",
+        "lastEditedBy" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "21a51568-fc3b-4a9c-9631-090398f33972",
+        "parentId" : "c804c354-e397-4c95-9f5f-9cbd533b836d",
+        "authorId" : "9f89d32c-618e-430a-9597-be8c8d6db75e",
+        "body" : "yes, I should print more info",
+        "createdAt" : "2021-06-22T05:44:16Z",
+        "updatedAt" : "2021-06-22T05:44:16Z",
+        "lastEditedBy" : "9f89d32c-618e-430a-9597-be8c8d6db75e",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "95e000fd6575ae7e697417e2b18bf3f6ad68613b",
+    "line" : 61,
+    "diffHunk" : "@@ -1,1 +172,176 @@\t} else {\n\t\tfmt.Println(\"[dryrun] Would stop the kubelet\")\n\t}\n\n\t// Write the configuration for the kubelet (using the bootstrap token credentials) to disk so the kubelet can start"
   }
 ]

@@ -31,5 +31,38 @@
     "commit" : "7fa0b9b6c104d076bc3fe617e2e26baec495ff84",
     "line" : 34,
     "diffHunk" : "@@ -1,1 +32,36 @@func RecommendedDefaultEphemeralVolumeControllerConfiguration(obj *kubectrlmgrconfigv1alpha1.EphemeralVolumeControllerConfiguration) {\n\tif obj.ConcurrentEphemeralVolumeSyncs == 0 {\n\t\tobj.ConcurrentEphemeralVolumeSyncs = 5\n\t}\n}"
+  },
+  {
+    "id" : "ba759c1d-4ccd-4a18-ad91-8ce52136cf51",
+    "prId" : 102981,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/102981#pullrequestreview-723481305",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "d6843803-ad19-45be-8d2b-0b1c3fc0c72c",
+        "parentId" : null,
+        "authorId" : "8be927c4-cfb4-4077-b355-f4f3d84849b8",
+        "body" : "lgtm, would like an ack from @pohly that this controller's sync loop is threadsafe",
+        "createdAt" : "2021-07-27T14:50:46Z",
+        "updatedAt" : "2021-07-27T14:51:35Z",
+        "lastEditedBy" : "8be927c4-cfb4-4077-b355-f4f3d84849b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "9e5c2a86-43f8-4c77-b338-5ac1bc86249c",
+        "parentId" : "d6843803-ad19-45be-8d2b-0b1c3fc0c72c",
+        "authorId" : "ba0b9c6e-ec4c-4d1b-832e-751e6109bf38",
+        "body" : "It certainly was meant to be thread safe, so although that hasn't been tested at scale because it couldn't be enabled earlier, it should be fine.\r\n",
+        "createdAt" : "2021-08-05T15:11:36Z",
+        "updatedAt" : "2021-08-05T15:11:36Z",
+        "lastEditedBy" : "ba0b9c6e-ec4c-4d1b-832e-751e6109bf38",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "7fa0b9b6c104d076bc3fe617e2e26baec495ff84",
+    "line" : 34,
+    "diffHunk" : "@@ -1,1 +32,36 @@func RecommendedDefaultEphemeralVolumeControllerConfiguration(obj *kubectrlmgrconfigv1alpha1.EphemeralVolumeControllerConfiguration) {\n\tif obj.ConcurrentEphemeralVolumeSyncs == 0 {\n\t\tobj.ConcurrentEphemeralVolumeSyncs = 5\n\t}\n}"
   }
 ]

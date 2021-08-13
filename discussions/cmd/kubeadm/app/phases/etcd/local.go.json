@@ -482,5 +482,27 @@
     "commit" : "e4855bd1af4f7f4cee2be715888df41d0a8e2127",
     "line" : 18,
     "diffHunk" : "@@ -1,1 +42,46 @@\t}\n\n\tfmt.Printf(\"[etcd] Wrote Static Pod manifest for a local etcd instance to %q\\n\", kubeadmconstants.GetStaticPodFilepath(kubeadmconstants.Etcd, manifestDir))\n\treturn nil\n}"
+  },
+  {
+    "id" : "751fca16-d7df-47a6-b818-505b46cd0206",
+    "prId" : 103027,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103027#pullrequestreview-726652180",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "d85c6418-c3a5-4b92-b5f0-c77b7e22a537",
+        "parentId" : null,
+        "authorId" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "body" : "passing a nil cluster seems fine here, due to:\r\nhttps://github.com/kubernetes/kubernetes/blob/94769757079c71ef2377260b84c0c81ec2e671d8/cmd/kubeadm/app/phases/etcd/local.go#L233-L234\r\n\r\nhttps://github.com/kubernetes/kubernetes/blob/94769757079c71ef2377260b84c0c81ec2e671d8/cmd/kubeadm/app/phases/etcd/local.go#L173\r\n\r\nhttps://github.com/kubernetes/kubernetes/blob/94769757079c71ef2377260b84c0c81ec2e671d8/cmd/kubeadm/app/phases/etcd/local.go#L251-L253\r\n",
+        "createdAt" : "2021-08-10T17:25:30Z",
+        "updatedAt" : "2021-08-10T17:25:30Z",
+        "lastEditedBy" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "95e000fd6575ae7e697417e2b18bf3f6ad68613b",
+    "line" : 53,
+    "diffHunk" : "@@ -1,1 +160,164 @@\tfmt.Printf(\"[etcd] Creating static Pod manifest for %q\\n\", kubeadmconstants.Etcd)\n\n\tif err := prepareAndWriteEtcdStaticPod(manifestDir, patchesDir, cfg, endpoint, nodeName, cluster, isDryRun); err != nil {\n\t\treturn err\n\t}"
   }
 ]

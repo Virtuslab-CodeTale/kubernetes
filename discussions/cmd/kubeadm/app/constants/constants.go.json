@@ -1527,5 +1527,27 @@
     "commit" : "fbc550c9453c48c431ea0bfe865356bc5000ba9f",
     "line" : null,
     "diffHunk" : "@@ -1,1 +33,37 @@\t// because of all the other sub-packages that would get vendored. To fix this, a pkg/kubeapiserver/authorizer/modes package\n\t// or similar should exist that only has these constants; then we can vendor it.\n\tAuthzModeAlwaysAllow = \"AlwaysAllow\"\n\tAuthzModeABAC        = \"ABAC\"\n\tAuthzModeRBAC        = \"RBAC\""
+  },
+  {
+    "id" : "08c0c41d-e9e3-4a5e-80f1-290413c2cf7e",
+    "prId" : 103027,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103027#pullrequestreview-688650992",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "d1aee49e-2407-438b-92ce-d7d0fec9b453",
+        "parentId" : null,
+        "authorId" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "body" : "depending on https://github.com/kubernetes/kubernetes/pull/103027/files#r655531613 maybe we can avoid this constant.",
+        "createdAt" : "2021-06-21T16:36:23Z",
+        "updatedAt" : "2021-06-21T16:36:24Z",
+        "lastEditedBy" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "95e000fd6575ae7e697417e2b18bf3f6ad68613b",
+    "line" : 5,
+    "diffHunk" : "@@ -1,1 +49,53 @@\n\t// DefaultCertificateDir defines default certificate directory\n\tDefaultCertificateDir = \"pki\"\n\n\t// CACertAndKeyBaseName defines certificate authority base name"
   }
 ]
