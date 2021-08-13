@@ -2407,5 +2407,38 @@
     "commit" : "1887ddfc9685c45e68eb330be28b2509511dfdfd",
     "line" : 12,
     "diffHunk" : "@@ -1,1 +655,659 @@\n    cloud_config_arg=(\"--cloud-provider=${CLOUD_PROVIDER}\" \"--cloud-config=${CLOUD_CONFIG}\")\n    cloud_config_arg+=(\"--configure-cloud-routes=${CONFIGURE_CLOUD_ROUTES}\")\n    if [[ \"${EXTERNAL_CLOUD_PROVIDER:-}\" == \"true\" ]]; then\n      cloud_config_arg=(\"--cloud-provider=external\")"
+  },
+  {
+    "id" : "9f7e71e9-3186-4648-91a0-e42570612be0",
+    "prId" : 103710,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103710#pullrequestreview-707611213",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "48052e10-76e4-4cf8-93bd-1c403ff699fd",
+        "parentId" : null,
+        "authorId" : "bd04f755-e62f-45fb-8771-4cc2b5db49d4",
+        "body" : "@nckturner is `true` the current default if `--configure-cloud-routes` is not specified in the command line?",
+        "createdAt" : "2021-07-15T13:35:18Z",
+        "updatedAt" : "2021-07-15T13:35:19Z",
+        "lastEditedBy" : "bd04f755-e62f-45fb-8771-4cc2b5db49d4",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "487fb2ec-17c3-4136-bd19-02f67db9dba5",
+        "parentId" : "48052e10-76e4-4cf8-93bd-1c403ff699fd",
+        "authorId" : "ddc05ecb-1a86-4393-8e22-f1bb528c2d50",
+        "body" : "Yes, that is correct.",
+        "createdAt" : "2021-07-15T16:52:10Z",
+        "updatedAt" : "2021-07-15T16:52:10Z",
+        "lastEditedBy" : "ddc05ecb-1a86-4393-8e22-f1bb528c2d50",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "1887ddfc9685c45e68eb330be28b2509511dfdfd",
+    "line" : 12,
+    "diffHunk" : "@@ -1,1 +655,659 @@\n    cloud_config_arg=(\"--cloud-provider=${CLOUD_PROVIDER}\" \"--cloud-config=${CLOUD_CONFIG}\")\n    cloud_config_arg+=(\"--configure-cloud-routes=${CONFIGURE_CLOUD_ROUTES}\")\n    if [[ \"${EXTERNAL_CLOUD_PROVIDER:-}\" == \"true\" ]]; then\n      cloud_config_arg=(\"--cloud-provider=external\")"
   }
 ]

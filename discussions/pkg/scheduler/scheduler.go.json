@@ -2704,5 +2704,27 @@
     "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
     "line" : 25,
     "diffHunk" : "@@ -1,1 +667,671 @@\t\t\t\t// as the assumed Pod had occupied a certain amount of resources in scheduler cache.\n\t\t\t\t// TODO(#103853): de-duplicate the logic.\n\t\t\t\tsched.SchedulingQueue.MoveAllToActiveOrBackoffQueue(internalqueue.AssignedPodDelete, nil)\n\t\t\t}\n\t\t\tsched.recordSchedulingFailure(fwk, assumedPodInfo, preBindStatus.AsError(), SchedulerError, \"\")"
+  },
+  {
+    "id" : "6c7c99a4-2fe2-4791-b91e-220c2bd74ab0",
+    "prId" : 103805,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103805#pullrequestreview-718181970",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "a4e6e266-47c9-41c4-b5e0-56951aa9b3ca",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "nit: maybe create a new method `MoveAllToActiveOrBackoffQueueWithFilter`, so you don't have to pass `nil` to `MoveAllToActiveOrBackoffQueue`",
+        "createdAt" : "2021-07-29T14:41:10Z",
+        "updatedAt" : "2021-07-29T15:16:06Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
+    "line" : 25,
+    "diffHunk" : "@@ -1,1 +667,671 @@\t\t\t\t// as the assumed Pod had occupied a certain amount of resources in scheduler cache.\n\t\t\t\t// TODO(#103853): de-duplicate the logic.\n\t\t\t\tsched.SchedulingQueue.MoveAllToActiveOrBackoffQueue(internalqueue.AssignedPodDelete, nil)\n\t\t\t}\n\t\t\tsched.recordSchedulingFailure(fwk, assumedPodInfo, preBindStatus.AsError(), SchedulerError, \"\")"
   }
 ]

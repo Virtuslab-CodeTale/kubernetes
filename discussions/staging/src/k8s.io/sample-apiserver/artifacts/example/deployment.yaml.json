@@ -31,5 +31,27 @@
     "commit" : "ebe550bd488aef61cab7b1814d908924c99b241a",
     "line" : 5,
     "diffHunk" : "@@ -1,1 +27,31 @@        args: [ \"--etcd-servers=http://localhost:2379\" ]\n      - name: etcd\n        image: quay.io/coreos/etcd:v3.5.0"
+  },
+  {
+    "id" : "086c7212-c799-4f2a-8ddd-3e7d01c493c9",
+    "prId" : 103724,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103724#pullrequestreview-728724107",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "2a5a9b51-4660-4de5-9495-c3146c2507d7",
+        "parentId" : null,
+        "authorId" : "5de211e4-9744-455e-9548-1a8e70ed1b2e",
+        "body" : "/cc @liggitt @lavalamp @deads2k \r\nwe need an /approve from someone in sample-apiserver/OWNERS for this comment change",
+        "createdAt" : "2021-08-12T14:49:19Z",
+        "updatedAt" : "2021-08-12T14:49:19Z",
+        "lastEditedBy" : "5de211e4-9744-455e-9548-1a8e70ed1b2e",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "bbb368b70127e095ee3265630967acfa914ed3fe",
+    "line" : 7,
+    "diffHunk" : "@@ -1,1 +22,26 @@        # or\n        # docker pull k8s.gcr.io/e2e-test-images/sample-apiserver:1.17.4\n        # docker tag k8s.gcr.io/e2e-test-images/sample-apiserver:1.17.4 kube-sample-apiserver:latest\n        image: kube-sample-apiserver:latest\n        imagePullPolicy: Never"
   }
 ]

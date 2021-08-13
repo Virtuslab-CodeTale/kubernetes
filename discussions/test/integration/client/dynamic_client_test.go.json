@@ -196,5 +196,71 @@
     "commit" : "ca90849724e187e64bfada85d51e8e72572844e0",
     "line" : 81,
     "diffHunk" : "@@ -1,1 +265,269 @@\t\tt.Fatalf(\"unexpected error when constructing extrator: %v\", err)\n\t}\n\textracted, err := extractor.Extract(actual, mgr)\n\tif err != nil {\n\t\tt.Fatalf(\"unexpected error when extracting: %v\", err)"
+  },
+  {
+    "id" : "cd4cca41-ffc3-4233-a54d-946039fc5a2c",
+    "prId" : 103564,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103564#pullrequestreview-713309066",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "e7abb971-0db9-4b44-945d-4b49e0c2c399",
+        "parentId" : null,
+        "authorId" : "a139439a-9f9e-4518-b4f3-9c602d956c57",
+        "body" : "I'm not super sure what this test is doing, but I think you need a test that would actually extract a small applied object from a larger object, and see that you can still extract the applied object.",
+        "createdAt" : "2021-07-19T23:53:55Z",
+        "updatedAt" : "2021-07-20T00:09:44Z",
+        "lastEditedBy" : "a139439a-9f9e-4518-b4f3-9c602d956c57",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "8b494f8d-8728-4df3-8516-b5f5d6466340",
+        "parentId" : "e7abb971-0db9-4b44-945d-4b49e0c2c399",
+        "authorId" : "f4ac3f8f-7ffb-4966-8247-0d4dc4a5bca1",
+        "body" : "modified the test based on our offline discussion to only test the \"value-add\" of `extractUnstructured`",
+        "createdAt" : "2021-07-22T23:28:55Z",
+        "updatedAt" : "2021-07-22T23:46:42Z",
+        "lastEditedBy" : "f4ac3f8f-7ffb-4966-8247-0d4dc4a5bca1",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "ca90849724e187e64bfada85d51e8e72572844e0",
+    "line" : 24,
+    "diffHunk" : "@@ -1,1 +208,212 @@}\n\nfunc TestUnstructuredExtract(t *testing.T) {\n\tresult := kubeapiservertesting.StartTestServerOrDie(t, nil, []string{\"--disable-admission-plugins\", \"ServiceAccount\"}, framework.SharedEtcd())\n\tdefer result.TearDownFn()"
+  },
+  {
+    "id" : "7f802eaf-d560-4274-8b85-af8aeb175482",
+    "prId" : 103564,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103564#pullrequestreview-715400894",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "1d4f6f1a-7893-47ce-bcb8-193610206b66",
+        "parentId" : null,
+        "authorId" : "a139439a-9f9e-4518-b4f3-9c602d956c57",
+        "body" : "I think that's good, I wish maybe we could guarantee there are other fields. (to be fair, we know there are other fields because of defaulting, so that's also fine). We don't want to re-test the whole feature though. Thanks!",
+        "createdAt" : "2021-07-26T19:46:14Z",
+        "updatedAt" : "2021-07-26T19:46:27Z",
+        "lastEditedBy" : "a139439a-9f9e-4518-b4f3-9c602d956c57",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "7ad83805-9597-435c-bcfd-45009d1926e4",
+        "parentId" : "1d4f6f1a-7893-47ce-bcb8-193610206b66",
+        "authorId" : "f4ac3f8f-7ffb-4966-8247-0d4dc4a5bca1",
+        "body" : "I guess I could add an assertion for one of the defaulted fields (that it exists on actual, but not in extracted), but that seems a bit construed. \r\n\r\nI could also do a second apply with another manager, but like you said, that' more about testing the underlying `ExtractItems` rather than this specific unstructed one.\r\n\r\nEither way let me know if either of these sound compelling or if you think of any way to validate the other fields, leaving as is for now.",
+        "createdAt" : "2021-07-27T01:39:33Z",
+        "updatedAt" : "2021-07-27T01:39:51Z",
+        "lastEditedBy" : "f4ac3f8f-7ffb-4966-8247-0d4dc4a5bca1",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "ca90849724e187e64bfada85d51e8e72572844e0",
+    "line" : 81,
+    "diffHunk" : "@@ -1,1 +265,269 @@\t\tt.Fatalf(\"unexpected error when constructing extrator: %v\", err)\n\t}\n\textracted, err := extractor.Extract(actual, mgr)\n\tif err != nil {\n\t\tt.Fatalf(\"unexpected error when extracting: %v\", err)"
   }
 ]

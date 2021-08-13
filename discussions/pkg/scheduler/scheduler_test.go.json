@@ -438,5 +438,38 @@
     "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
     "line" : 13,
     "diffHunk" : "@@ -1,1 +948,952 @@\t\t\ttestSchedulerName: fwk,\n\t\t},\n\t\tclient:          client,\n\t\tSchedulingQueue: internalqueue.NewTestQueue(context.Background(), nil),\n\t}"
+  },
+  {
+    "id" : "820eb7ec-15fc-4d7a-a0b1-6a5ef9256acb",
+    "prId" : 103805,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103805#pullrequestreview-713043816",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "ea264bd9-480c-4049-9019-42bbae19376e",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "Can we add unit tests for the cases of failure during binding?",
+        "createdAt" : "2021-07-22T16:13:25Z",
+        "updatedAt" : "2021-07-22T16:13:44Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "7a2bebdf-0906-49a5-a53f-aad3473b5c0b",
+        "parentId" : "ea264bd9-480c-4049-9019-42bbae19376e",
+        "authorId" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "body" : "Sure, let me craft some tests to cover that.",
+        "createdAt" : "2021-07-22T17:18:00Z",
+        "updatedAt" : "2021-07-22T17:18:00Z",
+        "lastEditedBy" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
+    "line" : 13,
+    "diffHunk" : "@@ -1,1 +948,952 @@\t\t\ttestSchedulerName: fwk,\n\t\t},\n\t\tclient:          client,\n\t\tSchedulingQueue: internalqueue.NewTestQueue(context.Background(), nil),\n\t}"
   }
 ]

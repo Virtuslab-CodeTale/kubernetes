@@ -1,0 +1,35 @@
+[
+  {
+    "id" : "851fcd6e-5d28-4643-9bea-9ddfff760feb",
+    "prId" : 103654,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103654#pullrequestreview-705367064",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "401b53f7-2554-44f4-a23a-0552536f6cfb",
+        "parentId" : null,
+        "authorId" : "09e31512-b413-47a1-bc83-20b5a77064ee",
+        "body" : "nice :) clever",
+        "createdAt" : "2021-07-13T14:27:47Z",
+        "updatedAt" : "2021-07-13T14:27:52Z",
+        "lastEditedBy" : "09e31512-b413-47a1-bc83-20b5a77064ee",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "c616e0e2-fc0f-4a46-bb7f-ff79176a1121",
+        "parentId" : "401b53f7-2554-44f4-a23a-0552536f6cfb",
+        "authorId" : "775ff044-67f8-4bdc-93af-09db25e4fe71",
+        "body" : "this took me longer to sort out that I would like to admit.",
+        "createdAt" : "2021-07-13T15:51:21Z",
+        "updatedAt" : "2021-07-13T15:51:21Z",
+        "lastEditedBy" : "775ff044-67f8-4bdc-93af-09db25e4fe71",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "c799a37654db8a50b010d256d0200a9df131f3f8",
+    "line" : 5,
+    "diffHunk" : "@@ -1,1 +59,63 @@  stability_check_setup\n  temp_file=$(mktemp)\n  doValidate=$(find_files_to_check | grep -E \".*.go\" | grep -v \".*_test.go\" | sort | KUBE_ROOT=${KUBE_ROOT} xargs -L 200 go run \"test/instrumentation/main.go\" \"test/instrumentation/decode_metric.go\" \"test/instrumentation/find_stable_metric.go\" \"test/instrumentation/error.go\" \"test/instrumentation/metric.go\" -- 1>\"${temp_file}\")\n\n  if $doValidate; then"
+  }
+]

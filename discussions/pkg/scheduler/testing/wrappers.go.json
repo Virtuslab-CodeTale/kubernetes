@@ -152,5 +152,38 @@
     "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
     "line" : 13,
     "diffHunk" : "@@ -1,1 +418,422 @@\tp.Spec.Containers = append(p.Spec.Containers, v1.Container{\n\t\tName:  fmt.Sprintf(\"con%d\", len(p.Spec.Containers)),\n\t\tImage: imageutils.GetPauseImageName(),\n\t\tResources: v1.ResourceRequirements{\n\t\t\tRequests: res,"
+  },
+  {
+    "id" : "e49496f2-b664-46c8-b747-2fec0a8d55e3",
+    "prId" : 103805,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103805#pullrequestreview-718403272",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "c647f5ed-d767-4d1d-99f5-64baeb84b128",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "why was this change necessary?\r\nCould you just put `Image: \"foo\"`? We don't really need it to be a working image, do we?",
+        "createdAt" : "2021-07-29T14:45:51Z",
+        "updatedAt" : "2021-07-29T15:16:06Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "409cb2a5-fd4e-454c-b585-f2f241f094fe",
+        "parentId" : "c647f5ed-d767-4d1d-99f5-64baeb84b128",
+        "authorId" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "body" : "For UTs, we don't need to set the image name; for integration tests, we need to set a name (fake one is fine). However given this may be used by e2e as well, probably better to set a non-fake image name here.",
+        "createdAt" : "2021-07-29T18:21:30Z",
+        "updatedAt" : "2021-07-29T18:21:30Z",
+        "lastEditedBy" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
+    "line" : 13,
+    "diffHunk" : "@@ -1,1 +418,422 @@\tp.Spec.Containers = append(p.Spec.Containers, v1.Container{\n\t\tName:  fmt.Sprintf(\"con%d\", len(p.Spec.Containers)),\n\t\tImage: imageutils.GetPauseImageName(),\n\t\tResources: v1.ResourceRequirements{\n\t\t\tRequests: res,"
   }
 ]

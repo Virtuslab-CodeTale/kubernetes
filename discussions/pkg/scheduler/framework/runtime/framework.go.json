@@ -339,5 +339,38 @@
     "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
     "line" : 12,
     "diffHunk" : "@@ -1,1 +1098,1102 @@\t\twaitingPod.Reject(\"\", \"removed\")\n\t\treturn true\n\t}\n\treturn false\n}"
+  },
+  {
+    "id" : "b860e262-3896-488b-b279-430ce30e176a",
+    "prId" : 103805,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103805#pullrequestreview-718400140",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "31f67b88-a991-4ea8-a378-a9a9ea7b1471",
+        "parentId" : null,
+        "authorId" : "7eef2a23-dd8d-47ae-bcef-7fd4916747e5",
+        "body" : "```\r\nif waitingPod := f.waitingPods.get(uid); waitingPod != nil {\r\n       waitingPod.Reject(\"\", \"removed\")\r\n      return true\r\n}\r\n```\r\nis this better? 🧐",
+        "createdAt" : "2021-07-29T08:57:22Z",
+        "updatedAt" : "2021-07-29T09:00:30Z",
+        "lastEditedBy" : "7eef2a23-dd8d-47ae-bcef-7fd4916747e5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "db3ac578-8f9c-4173-8702-b5e75a5eeb7c",
+        "parentId" : "31f67b88-a991-4ea8-a378-a9a9ea7b1471",
+        "authorId" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "body" : "Yes.",
+        "createdAt" : "2021-07-29T18:17:56Z",
+        "updatedAt" : "2021-07-29T18:17:57Z",
+        "lastEditedBy" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
+    "line" : 12,
+    "diffHunk" : "@@ -1,1 +1098,1102 @@\t\twaitingPod.Reject(\"\", \"removed\")\n\t\treturn true\n\t}\n\treturn false\n}"
   }
 ]

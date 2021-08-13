@@ -1,0 +1,57 @@
+[
+  {
+    "id" : "d36d10ee-3de2-4faf-9666-24a9fe8ad8cc",
+    "prId" : 103608,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103608#pullrequestreview-703003545",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "98e45f19-110d-423a-b2bc-cd0f9bfce8c8",
+        "parentId" : null,
+        "authorId" : "802db12b-543c-4785-b078-18f5cdc5ee9c",
+        "body" : "Maybe link here to the original locking code and explain why it can't be used?",
+        "createdAt" : "2021-07-09T12:36:02Z",
+        "updatedAt" : "2021-07-09T12:41:21Z",
+        "lastEditedBy" : "802db12b-543c-4785-b078-18f5cdc5ee9c",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "2c2661a4113850d8f6165bb1d57f931a5443bff4",
+    "line" : 45,
+    "diffHunk" : "@@ -1,1 +43,47 @@\t\t// of the another kubelet(self-hosted) trying to start. When this lock contention happens\n\t\t// it is expected that the running kubelet must terminate and wait until the lock on the\n\t\t// lock file is released.\n\t\t// Kubelet uses the same approach to acquire the lock on lock file as shown here:\n\t\t// https://github.com/kubernetes/kubernetes/blob/master/cmd/kubelet/app/server.go#L530-#L546"
+  },
+  {
+    "id" : "ccfee96b-c2fc-4f29-b022-f7f60c5e1646",
+    "prId" : 103608,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103608#pullrequestreview-703245568",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "40edf34b-48c2-484d-86bf-b20644ae94a4",
+        "parentId" : null,
+        "authorId" : "85d51570-e06e-4b3f-a869-f5f820e49119",
+        "body" : "should this action be deferred as well to ensure that we will release it for sure?",
+        "createdAt" : "2021-07-09T16:21:56Z",
+        "updatedAt" : "2021-07-09T16:21:56Z",
+        "lastEditedBy" : "85d51570-e06e-4b3f-a869-f5f820e49119",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "c341d3a6-9265-49f0-ae71-f55cf211ed5b",
+        "parentId" : "40edf34b-48c2-484d-86bf-b20644ae94a4",
+        "authorId" : "11e6dcb4-81d9-4efa-afcb-b2b7f9c90262",
+        "body" : "addressed the feedback.",
+        "createdAt" : "2021-07-09T17:08:59Z",
+        "updatedAt" : "2021-07-09T17:09:00Z",
+        "lastEditedBy" : "11e6dcb4-81d9-4efa-afcb-b2b7f9c90262",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "2c2661a4113850d8f6165bb1d57f931a5443bff4",
+    "line" : 71,
+    "diffHunk" : "@@ -1,1 +69,73 @@\t\tginkgo.By(\"releasing the lock on lock file i.e /var/run/kubelet.lock\")\n\t\t// Release the lock.\n\t\terr = unix.Flock(fd, unix.LOCK_UN)\n\t\tframework.ExpectNoError(err)\n"
+  }
+]

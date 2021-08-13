@@ -1109,5 +1109,170 @@
     "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
     "line" : 243,
     "diffHunk" : "@@ -1,1 +1928,1932 @@}\n\n// TestPreemptWithPermitPlugin tests preempt with permit plugins.\n// It verifies how waitingPods behave in different scenarios:\n// - when waitingPods get preempted"
+  },
+  {
+    "id" : "bde0a4e2-2a1f-48bf-a5bb-433a8b02c9a7",
+    "prId" : 103805,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103805#pullrequestreview-718428505",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "97e71f0f-515c-4c75-8a05-6bbe5fc7c144",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "shouldn't we wait for a scheduling error followed by a successful schedule?",
+        "createdAt" : "2021-07-29T14:53:23Z",
+        "updatedAt" : "2021-07-29T15:16:06Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "80a0cc8d-bfa7-42cc-841f-f1c9ec4d5537",
+        "parentId" : "97e71f0f-515c-4c75-8a05-6bbe5fc7c144",
+        "authorId" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "body" : "The first scheduling error is a transient state. Checking needs precise timing and may cause flakes, so I chose to check the eventual state only.",
+        "createdAt" : "2021-07-29T18:29:12Z",
+        "updatedAt" : "2021-07-29T18:29:12Z",
+        "lastEditedBy" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "2d25f7cd-8c73-4631-af17-946ef23658a1",
+        "parentId" : "97e71f0f-515c-4c75-8a05-6bbe5fc7c144",
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "I see. Would it be worth doing: `if (test.fail || test.reject) && !test.succeedOnRetry` above?",
+        "createdAt" : "2021-07-29T18:51:42Z",
+        "updatedAt" : "2021-07-29T18:51:42Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
+    "line" : 207,
+    "diffHunk" : "@@ -1,1 +1076,1080 @@\n\t\t\tif test.fail || test.reject {\n\t\t\t\tif test.succeedOnRetry {\n\t\t\t\t\tif err = testutils.WaitForPodToScheduleWithTimeout(testCtx.ClientSet, pod, 10*time.Second); err != nil {\n\t\t\t\t\t\tt.Errorf(\"Expected the pod to be schedulable on retry, but got an error: %v\", err)"
+  },
+  {
+    "id" : "eb759cc0-8e9c-4d01-94f9-88df0d3e28bf",
+    "prId" : 103805,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103805#pullrequestreview-718181970",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "e6479647-641b-4803-b7ee-027d67c25807",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "Explain what is the 2nd profile for",
+        "createdAt" : "2021-07-29T14:54:13Z",
+        "updatedAt" : "2021-07-29T15:16:06Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
+    "line" : 107,
+    "diffHunk" : "@@ -1,1 +973,977 @@\t}\n\n\t// Setup initial prebind and filter plugin in different profiles.\n\t// The second profile ensures the embedded filter plugin is exclusively called, and hence\n\t// we can use its internal `numFilterCalled` to perform some precise checking logic."
+  },
+  {
+    "id" : "bfe66d89-3f86-4fd1-bf68-294774373d4e",
+    "prId" : 103805,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103805#pullrequestreview-723643546",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "80ed0398-d46f-4316-9749-b413078961d2",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "here we are testing that the incoming Pod doesn't go to the unschedulable queue and gets retried, right?",
+        "createdAt" : "2021-07-29T15:04:40Z",
+        "updatedAt" : "2021-07-29T15:16:06Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "5e521474-da3e-442a-86a0-acb4e7d79a10",
+        "parentId" : "80ed0398-d46f-4316-9749-b413078961d2",
+        "authorId" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "body" : "It actually goes to unschedulableQ for the 1st try. And then the preBind logic fails itself, so it's able to be moved back to activeQ. And after that, as `succeedOnRetry` is true, it's scheduled successfully on 2nd try.",
+        "createdAt" : "2021-07-29T18:33:52Z",
+        "updatedAt" : "2021-07-29T18:33:52Z",
+        "lastEditedBy" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "fa523b21-9ed5-4b7d-9199-d84a61022281",
+        "parentId" : "80ed0398-d46f-4316-9749-b413078961d2",
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "> It actually goes to unschedulableQ for the 1st try\r\n\r\nWhy? Doesn't it directly fail on PreBind?",
+        "createdAt" : "2021-07-29T18:50:38Z",
+        "updatedAt" : "2021-07-29T18:50:38Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "42a04b25-180c-4bef-b73a-654454ac062d",
+        "parentId" : "80ed0398-d46f-4316-9749-b413078961d2",
+        "authorId" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "body" : "Nope with succeedOnRetry = true:\r\n\r\n```go\r\nfunc (pp *PreBindPlugin) PreBind(ctx context.Context, state *framework.CycleState, pod *v1.Pod, nodeName string) *framework.Status {\r\n\tpp.numPreBindCalled++\r\n\tif _, tried := pp.podUIDs[pod.UID]; tried && pp.succeedOnRetry {\r\n\t\treturn nil\r\n\t}\r\n\tpp.podUIDs[pod.UID] = struct{}{}\r\n```",
+        "createdAt" : "2021-08-05T17:54:22Z",
+        "updatedAt" : "2021-08-05T17:54:22Z",
+        "lastEditedBy" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
+    "line" : 170,
+    "diffHunk" : "@@ -1,1 +1039,1043 @@\t\t\tfail:           true,\n\t\t\treject:         false,\n\t\t\tsucceedOnRetry: true,\n\t\t},\n\t\t{"
+  },
+  {
+    "id" : "68192420-d8f8-4a2a-a3fa-8be2ffaacc0b",
+    "prId" : 103805,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103805#pullrequestreview-718181970",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "9efda13b-71ba-4052-a4a4-937bed79ed45",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "explain the intent of the filter plugin.",
+        "createdAt" : "2021-07-29T15:07:16Z",
+        "updatedAt" : "2021-07-29T15:16:06Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
+    "line" : 251,
+    "diffHunk" : "@@ -1,1 +1935,1939 @@// - when waitingPods get deleted externally, it'd trigger moving unschedulable Pods\nfunc TestPreemptWithPermitPlugin(t *testing.T) {\n\t// Create a plugin registry for testing. Register a permit and a filter plugin.\n\tpermitPlugin := &PermitPlugin{}\n\t// Inject a fake filter plugin to use its internal `numFilterCalled` to verify"
+  },
+  {
+    "id" : "f4af4280-8a5e-48b1-a6d1-8f6fcdef18c0",
+    "prId" : 103805,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103805#pullrequestreview-718181970",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "f6f616c2-547f-4b87-917d-bd25a0da60f7",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "Needs a comment explaining the high level intention of the test.",
+        "createdAt" : "2021-07-29T15:10:42Z",
+        "updatedAt" : "2021-07-29T15:16:06Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "dc079acc2be603fbc2065e2748c79bb5e2c3453d",
+    "line" : 243,
+    "diffHunk" : "@@ -1,1 +1928,1932 @@}\n\n// TestPreemptWithPermitPlugin tests preempt with permit plugins.\n// It verifies how waitingPods behave in different scenarios:\n// - when waitingPods get preempted"
   }
 ]

@@ -1,0 +1,68 @@
+[
+  {
+    "id" : "62b55912-4300-436d-ad58-b32217d03ed8",
+    "prId" : 103724,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103724#pullrequestreview-717087816",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "328c969c-00bb-4e3d-9048-b2f23bc3fe10",
+        "parentId" : null,
+        "authorId" : "6e2b5eda-1533-4798-a56c-432faaf38480",
+        "body" : "Is this file even used anymore?  I couldn't find any references to it (doing a very simple search in the repo), and the interesting part of a lot of these changes is that they aren't used in e2e anymore (but a few are used in the `test/cmd` shell scripts).  The key point is that these *can't* be used inside of e2e binaries because they aren't subject to dynamic replacement (there's no code reading these and then looking up the correct value of the image before running it), so it's possible that we should move these out of test/e2e and into test/cmd/ (where appropriate).\r\n\r\nFor example:\r\n\r\n```\r\n  kubectl create -f test/e2e/testing-manifests/kubectl/agnhost-primary-pod.yaml \"${kube_flags[@]}\"\r\n```\r\n\r\nin `test/cmd/core.sh` is the only reference to the file above, so a separate PR moving these is probably appropriate.",
+        "createdAt" : "2021-07-19T13:49:31Z",
+        "updatedAt" : "2021-07-19T13:49:31Z",
+        "lastEditedBy" : "6e2b5eda-1533-4798-a56c-432faaf38480",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "eafba753-9056-49f1-a69a-757362de2840",
+        "parentId" : "328c969c-00bb-4e3d-9048-b2f23bc3fe10",
+        "authorId" : "5de211e4-9744-455e-9548-1a8e70ed1b2e",
+        "body" : "I could have sworn we had code that dynamically substituted to support repo mappings passed in via `KUBE_TEST_REPO`\r\n\r\nhttps://github.com/kubernetes/kubernetes/blob/9f47110aa29094ed2878cf1d85874cb59214664a/test/utils/image/manifest.go#L253-L255\r\n\r\nMaybe it's been removed since I last looked?",
+        "createdAt" : "2021-07-20T23:21:56Z",
+        "updatedAt" : "2021-07-20T23:21:56Z",
+        "lastEditedBy" : "5de211e4-9744-455e-9548-1a8e70ed1b2e",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "28f2b5e5-4ac0-495e-b0e5-356c02c8b38a",
+        "parentId" : "328c969c-00bb-4e3d-9048-b2f23bc3fe10",
+        "authorId" : "5de211e4-9744-455e-9548-1a8e70ed1b2e",
+        "body" : "Ah, here it is https://github.com/kubernetes/kubernetes/blob/9f47110aa29094ed2878cf1d85874cb59214664a/test/utils/image/manifest.go#L352-L356\r\n\r\nUsed by\r\nhttps://github.com/kubernetes/kubernetes/blob/9f47110aa29094ed2878cf1d85874cb59214664a/test/e2e/storage/utils/create.go#L626-L629\r\n\r\nWhich you can get to via\r\n\r\nhttps://github.com/kubernetes/kubernetes/blob/9f47110aa29094ed2878cf1d85874cb59214664a/test/e2e/storage/utils/create.go#L197\r\n\r\nor \r\n\r\nhttps://github.com/kubernetes/kubernetes/blob/9f47110aa29094ed2878cf1d85874cb59214664a/test/e2e/storage/utils/create.go#L116",
+        "createdAt" : "2021-07-20T23:25:41Z",
+        "updatedAt" : "2021-07-20T23:30:00Z",
+        "lastEditedBy" : "5de211e4-9744-455e-9548-1a8e70ed1b2e",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "a915cefd-6fe7-4354-8af0-05d1c70cc0d0",
+        "parentId" : "328c969c-00bb-4e3d-9048-b2f23bc3fe10",
+        "authorId" : "5de211e4-9744-455e-9548-1a8e70ed1b2e",
+        "body" : "tl;dr I don't know if you were talking about the things in this specific file or these manifests in general, but they can have their images dynamically substituted",
+        "createdAt" : "2021-07-20T23:32:20Z",
+        "updatedAt" : "2021-07-20T23:32:21Z",
+        "lastEditedBy" : "5de211e4-9744-455e-9548-1a8e70ed1b2e",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "fb576af3-9f27-45d1-8a18-dd996482d28a",
+        "parentId" : "328c969c-00bb-4e3d-9048-b2f23bc3fe10",
+        "authorId" : "8b178e45-b16b-405a-a22d-44899bf0bd64",
+        "body" : "So, indeed, some of these files do not seem to be used anymore, like:\r\n\r\n```\r\ntest/e2e/testing-manifests/ingress/http/rc.yaml\r\ntest/e2e/testing-manifests/ingress/http2/rc.yaml\r\ntest/e2e/testing-manifests/ingress/multiple-certs/rc.yaml\r\ntest/e2e/testing-manifests/ingress/pre-shared-cert/rc.yaml\r\ntest/e2e/testing-manifests/ingress/static-ip/rc.yaml\r\ntest/e2e/testing-manifests/serviceloadbalancer/netexecrc.yaml\r\n```\r\n\r\nSome of them are still being used, like the ``test/e2e/testing-manifests/ingress/neg*`` ones. \r\n\r\n``test/e2e/testing-manifests/kubectl/agnhost-primary-pod.yaml`` seems to be used only in ``test/cmd/core.sh``, so it could probably be moved out of ``test/e2e`` if needed.\r\n\r\nAnd indeed, for some files the used images are dynamically substituted, which can be useful for airgapped environments (originally, AFAIK, the mechanism was introduced so we can use container images with Windows support for Windows test runs, before all the necessary work merged into k/k test images). But any other cleanup / change can be done in another PRs, specifically targeted towards those purposes. This PR just cleans up the gcr.io references.\r\n",
+        "createdAt" : "2021-07-28T14:35:47Z",
+        "updatedAt" : "2021-07-28T14:35:47Z",
+        "lastEditedBy" : "8b178e45-b16b-405a-a22d-44899bf0bd64",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "bbb368b70127e095ee3265630967acfa914ed3fe",
+    "line" : 5,
+    "diffHunk" : "@@ -1,1 +13,17 @@      containers:\n      - name: netexec\n        image: k8s.gcr.io/e2e-test-images/agnhost:2.32\n        command: [\"/agnhost\", \"netexec\"]\n        ports:"
+  }
+]
