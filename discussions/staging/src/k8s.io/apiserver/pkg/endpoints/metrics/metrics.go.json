@@ -768,5 +768,38 @@
     "commit" : "d9d41b70f64da65525d769ab279e3930d59435fe",
     "line" : 47,
     "diffHunk" : "@@ -1,1 +573,577 @@\t//   GET /api/{version}/watch/{resource}\n\t// We correct it manually based on the pass verb from the installer.\n\tif suggestedVerb == \"WATCH\" || suggestedVerb == \"WATCHLIST\" {\n\t\treportedVerb = \"WATCH\"\n\t}"
+  },
+  {
+    "id" : "2e834696-5d36-4d40-9c0f-519e61ab12f9",
+    "prId" : 104161,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104161#pullrequestreview-723467671",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "34323dcf-0d9a-4d3c-9664-87946e60e33b",
+        "parentId" : null,
+        "authorId" : "09e31512-b413-47a1-bc83-20b5a77064ee",
+        "body" : "do we need to check the url directly for the watch segment or is this sufficient? ",
+        "createdAt" : "2021-08-05T14:49:00Z",
+        "updatedAt" : "2021-08-05T14:49:19Z",
+        "lastEditedBy" : "09e31512-b413-47a1-bc83-20b5a77064ee",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "6811662e-984a-4c10-ad9a-cf86c12954ca",
+        "parentId" : "34323dcf-0d9a-4d3c-9664-87946e60e33b",
+        "authorId" : "09e31512-b413-47a1-bc83-20b5a77064ee",
+        "body" : "I checked, this is probably okay.",
+        "createdAt" : "2021-08-05T15:00:30Z",
+        "updatedAt" : "2021-08-05T15:00:30Z",
+        "lastEditedBy" : "09e31512-b413-47a1-bc83-20b5a77064ee",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "d9d41b70f64da65525d769ab279e3930d59435fe",
+    "line" : 47,
+    "diffHunk" : "@@ -1,1 +573,577 @@\t//   GET /api/{version}/watch/{resource}\n\t// We correct it manually based on the pass verb from the installer.\n\tif suggestedVerb == \"WATCH\" || suggestedVerb == \"WATCHLIST\" {\n\t\treportedVerb = \"WATCH\"\n\t}"
   }
 ]

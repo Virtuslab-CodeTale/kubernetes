@@ -2319,5 +2319,27 @@
     "commit" : "c8431f42d9a2c54a978b8db4399660c168305e73",
     "line" : 4,
     "diffHunk" : "@@ -1,1 +82,86 @@\tgithub.com/vishvananda/netlink v1.1.0\n\tgithub.com/vmware/govmomi v0.20.3\n\tgo.etcd.io/etcd/api/v3 v3.5.0\n\tgo.etcd.io/etcd/client/pkg/v3 v3.5.0\n\tgo.etcd.io/etcd/client/v3 v3.5.0"
+  },
+  {
+    "id" : "b171974b-4bb2-4184-a1ef-d5c51ac81392",
+    "prId" : 104134,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104134#pullrequestreview-723564093",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "e4b5b9a8-1d94-4e9e-9b88-6a595c705c7d",
+        "parentId" : null,
+        "authorId" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "body" : "note, i cannot approve changes in the go.mod.\r\nonce we are done with the review here we can assign one of the maintainers for go.mod changes.\r\n",
+        "createdAt" : "2021-08-05T16:28:06Z",
+        "updatedAt" : "2021-08-05T16:28:06Z",
+        "lastEditedBy" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "c8431f42d9a2c54a978b8db4399660c168305e73",
+    "line" : 4,
+    "diffHunk" : "@@ -1,1 +82,86 @@\tgithub.com/vishvananda/netlink v1.1.0\n\tgithub.com/vmware/govmomi v0.20.3\n\tgo.etcd.io/etcd/api/v3 v3.5.0\n\tgo.etcd.io/etcd/client/pkg/v3 v3.5.0\n\tgo.etcd.io/etcd/client/v3 v3.5.0"
   }
 ]

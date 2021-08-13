@@ -31,5 +31,38 @@
     "commit" : "3e44139ae467fd55c887eb6e799735b1e508c9ad",
     "line" : 91,
     "diffHunk" : "@@ -1,1 +207,211 @@\tctx := genericapirequest.NewDefaultContext()\n\tkey := \"/jobs/\" + metav1.NamespaceDefault + \"/foo\"\n\ttests := []struct {\n\t\tdescription   string\n\t\texpectWarning bool"
+  },
+  {
+    "id" : "a75c1186-368c-4778-ad62-49c68936ed3d",
+    "prId" : 104080,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104080#pullrequestreview-722538642",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "e90d1141-49fe-4475-84d0-93586badec56",
+        "parentId" : null,
+        "authorId" : "8be927c4-cfb4-4077-b355-f4f3d84849b8",
+        "body" : "add test cases that invoke with requestinfo in the context for batch/v1 (warnings expected), batch/v2 (no warnings expected) and no API version info (no warnings expected)",
+        "createdAt" : "2021-08-04T14:04:43Z",
+        "updatedAt" : "2021-08-04T14:04:46Z",
+        "lastEditedBy" : "8be927c4-cfb4-4077-b355-f4f3d84849b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "75ef078c-e126-4144-ae8b-6085d937de9d",
+        "parentId" : "e90d1141-49fe-4475-84d0-93586badec56",
+        "authorId" : "38ca4f80-c365-4775-8981-1e56b713b07b",
+        "body" : "Done. PTAL and let me know if I missed any cases.",
+        "createdAt" : "2021-08-04T17:18:37Z",
+        "updatedAt" : "2021-08-04T17:18:49Z",
+        "lastEditedBy" : "38ca4f80-c365-4775-8981-1e56b713b07b",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "3e44139ae467fd55c887eb6e799735b1e508c9ad",
+    "line" : 91,
+    "diffHunk" : "@@ -1,1 +207,211 @@\tctx := genericapirequest.NewDefaultContext()\n\tkey := \"/jobs/\" + metav1.NamespaceDefault + \"/foo\"\n\ttests := []struct {\n\t\tdescription   string\n\t\texpectWarning bool"
   }
 ]
