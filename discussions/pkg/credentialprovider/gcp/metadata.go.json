@@ -526,5 +526,137 @@
     "commit" : "a947c32783e9027922762d6f76f5c27926f9bc0a",
     "line" : 22,
     "diffHunk" : "@@ -1,1 +146,150 @@// Enabled implements DockerConfigProvider for all of the Google implementations.\nfunc (g *MetadataProvider) Enabled() bool {\n\tonGCE := onGCEVM()\n\tif !onGCE {\n\t\treturn false"
+  },
+  {
+    "id" : "609fb4da-a22a-4f13-9429-64db54531e26",
+    "prId" : 102507,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/102507#pullrequestreview-710870485",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "f65fe57d-cd3e-437c-9dd0-38124d80ee48",
+        "parentId" : null,
+        "authorId" : "7aca96c2-45d7-4567-99be-0323d7556c55",
+        "body" : "Not sure I agree with this ordering. I agree about the relative costs but if we need to enter either switch the system is miconfigured. At the point the cost seems like a non issue. For the good case you need to pass both switched anyway. In this case we may have a misleading error message suggesting you are on GCP. I think it would be better to put back the original order and add a warning you are attempting to use a GCP credential provider on a non GCP VM to the !onGCEVM case.",
+        "createdAt" : "2021-07-19T20:08:20Z",
+        "updatedAt" : "2021-07-19T20:08:20Z",
+        "lastEditedBy" : "7aca96c2-45d7-4567-99be-0323d7556c55",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "3ee730a4-d1b4-4e90-b27a-3052241265a9",
+        "parentId" : "f65fe57d-cd3e-437c-9dd0-38124d80ee48",
+        "authorId" : "5821ed6f-e2e0-442e-9f8e-43ab7b9f2738",
+        "body" : "Avoiding the misleading error message was my original thinking, happy to switch it back.\r\n\r\nI'm not sure if the other warning you propose would add much value though: IIUC these credential providers are on by default (thus the need for this PR) so it's not like the user misconfigured something if we're getting this far on a non-GCP VM. The warning would just get logged all the time and wouldn't be actionable.",
+        "createdAt" : "2021-07-19T20:17:03Z",
+        "updatedAt" : "2021-07-19T20:17:03Z",
+        "lastEditedBy" : "5821ed6f-e2e0-442e-9f8e-43ab7b9f2738",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "0fe11b5d-feb9-45ac-80d0-17cd115637f1",
+        "parentId" : "f65fe57d-cd3e-437c-9dd0-38124d80ee48",
+        "authorId" : "7aca96c2-45d7-4567-99be-0323d7556c55",
+        "body" : "I thought we would only have this on if it was configured. If thats not true, then I think its even more important to switch back. (As you say to avoid the misleading error message)",
+        "createdAt" : "2021-07-19T21:53:55Z",
+        "updatedAt" : "2021-07-19T21:53:55Z",
+        "lastEditedBy" : "7aca96c2-45d7-4567-99be-0323d7556c55",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "a4e29ebe-38a6-4345-add6-3728c17eae2f",
+        "parentId" : "f65fe57d-cd3e-437c-9dd0-38124d80ee48",
+        "authorId" : "5821ed6f-e2e0-442e-9f8e-43ab7b9f2738",
+        "body" : "Switched this back around.",
+        "createdAt" : "2021-07-19T22:18:18Z",
+        "updatedAt" : "2021-07-19T22:18:18Z",
+        "lastEditedBy" : "5821ed6f-e2e0-442e-9f8e-43ab7b9f2738",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "61a94b83-8705-4f16-801e-a7e9a419d9e7",
+        "parentId" : "f65fe57d-cd3e-437c-9dd0-38124d80ee48",
+        "authorId" : "6dd71efb-88b1-4bb0-b30a-0df658362f14",
+        "body" : "I'm not following the logic here to switch the order back to run `onGCEVM` first. If the feature gate is enabled (i.e. disabled), then there's no reason to ever call onGCEVM, because the plugin is explicitly disabled. In this case, the warning message makes sense too, because the plugin is disabled anyways. When it is disabled, why bother running  `onGCEVM` which is a relatively expensive operation that reads a file from disk? ",
+        "createdAt" : "2021-07-20T16:44:02Z",
+        "updatedAt" : "2021-07-20T16:44:05Z",
+        "lastEditedBy" : "6dd71efb-88b1-4bb0-b30a-0df658362f14",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "13e225cf-b644-4e37-b3f9-657cadf45f02",
+        "parentId" : "f65fe57d-cd3e-437c-9dd0-38124d80ee48",
+        "authorId" : "5821ed6f-e2e0-442e-9f8e-43ab7b9f2738",
+        "body" : "With the in-tree cloud providers, you have to pass `--cloud-provider=foo` to enable them so it makes sense to print a warning if you pass that flag while the feature gate that disables them is turned on, since that's obviously a misconfiguration of either the flag or the feature gate.\r\n\r\nWith the in-tree credential providers OTOH, there's no flag to enable them (as far as I'm aware) -- we just rely on the `onGCEVM` check alone. So if the feature gate is turned on but we're not on a GCP VM, there's no reason to print a warning about the GCP provider being disabled... Nothing is misconfigured in that case, the warning is just confusing and unactionable.",
+        "createdAt" : "2021-07-20T17:05:59Z",
+        "updatedAt" : "2021-07-20T17:05:59Z",
+        "lastEditedBy" : "5821ed6f-e2e0-442e-9f8e-43ab7b9f2738",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "7ee17a7c-d641-4a08-b064-5e7b45ecd76a",
+        "parentId" : "f65fe57d-cd3e-437c-9dd0-38124d80ee48",
+        "authorId" : "6dd71efb-88b1-4bb0-b30a-0df658362f14",
+        "body" : "Gotcha, thanks for clarifying.",
+        "createdAt" : "2021-07-20T17:08:08Z",
+        "updatedAt" : "2021-07-20T17:08:08Z",
+        "lastEditedBy" : "6dd71efb-88b1-4bb0-b30a-0df658362f14",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "a947c32783e9027922762d6f76f5c27926f9bc0a",
+    "line" : 26,
+    "diffHunk" : "@@ -1,1 +150,154 @@\t\treturn false\n\t}\n\tif credentialprovider.AreLegacyCloudCredentialProvidersDisabled() {\n\t\twarnOnce.Do(func() {\n\t\t\tklog.V(4).Infof(\"GCP credential provider is now disabled. Please refer to sig-cloud-provider for guidance on external credential provider integration for GCP\")"
+  },
+  {
+    "id" : "5e101a99-502e-4a84-84e5-89898523a5c9",
+    "prId" : 102507,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/102507#pullrequestreview-722441028",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "70147ada-33c5-4347-82a5-e62e85773242",
+        "parentId" : null,
+        "authorId" : "6dd71efb-88b1-4bb0-b30a-0df658362f14",
+        "body" : "Cross linking this thread in case it gets lost in the comments https://github.com/kubernetes/kubernetes/pull/102507#discussion_r673290425\r\n\r\nI'm not following the logic here to switch the order back to run onGCEVM first. If the feature gate is enabled (i.e. disabled), then there's no reason to ever call onGCEVM, because the plugin is explicitly disabled. In this case, the warning message makes sense too, because the plugin is disabled anyways. When it is disabled, why bother running onGCEVM which is a relatively expensive operation that reads a file from disk?",
+        "createdAt" : "2021-07-20T16:55:09Z",
+        "updatedAt" : "2021-07-20T16:55:15Z",
+        "lastEditedBy" : "6dd71efb-88b1-4bb0-b30a-0df658362f14",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "9af63ab6-b7a1-4b54-a631-47766ab231a3",
+        "parentId" : "70147ada-33c5-4347-82a5-e62e85773242",
+        "authorId" : "8be927c4-cfb4-4077-b355-f4f3d84849b8",
+        "body" : "I think this got resolved below, right? this is to prevent logging GCE-specific messages when we're not even running on GCE, right?",
+        "createdAt" : "2021-08-04T13:36:10Z",
+        "updatedAt" : "2021-08-04T13:39:50Z",
+        "lastEditedBy" : "8be927c4-cfb4-4077-b355-f4f3d84849b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "f348c5e7-9aff-48ef-9d93-5ccbdf1658e3",
+        "parentId" : "70147ada-33c5-4347-82a5-e62e85773242",
+        "authorId" : "7aca96c2-45d7-4567-99be-0323d7556c55",
+        "body" : "I believe so yes. The cloud provider plugins are explicitly enabled. However the credential provider plugins are all \"enabled\". So we want to early out of this plugin if we are not on GCE without a warning that this plugin is disabled. The disabled warning only makes sense if you are on GCE.",
+        "createdAt" : "2021-08-04T15:37:37Z",
+        "updatedAt" : "2021-08-04T15:37:37Z",
+        "lastEditedBy" : "7aca96c2-45d7-4567-99be-0323d7556c55",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "a947c32783e9027922762d6f76f5c27926f9bc0a",
+    "line" : 22,
+    "diffHunk" : "@@ -1,1 +146,150 @@// Enabled implements DockerConfigProvider for all of the Google implementations.\nfunc (g *MetadataProvider) Enabled() bool {\n\tonGCE := onGCEVM()\n\tif !onGCE {\n\t\treturn false"
   }
 ]

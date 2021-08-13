@@ -64,5 +64,38 @@
     "commit" : "a947c32783e9027922762d6f76f5c27926f9bc0a",
     "line" : 22,
     "diffHunk" : "@@ -1,1 +55,59 @@// NewDockerKeyring creates a DockerKeyring to use for resolving credentials,\n// which draws from the set of registered credential providers.\nfunc NewDockerKeyring() DockerKeyring {\n\tkeyring := &providersDockerKeyring{\n\t\tProviders: make([]DockerConfigProvider, 0),"
+  },
+  {
+    "id" : "c52f694b-1f0a-4024-a0bc-212fc793b80f",
+    "prId" : 102507,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/102507#pullrequestreview-708779035",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "88c71283-0fea-4b4e-a9dc-ef6184c55c4d",
+        "parentId" : null,
+        "authorId" : "8be927c4-cfb4-4077-b355-f4f3d84849b8",
+        "body" : "this is called every time every a pod is created with dockershim... this seems late/frequent to be warning about disabled credential providers",
+        "createdAt" : "2021-07-02T03:36:10Z",
+        "updatedAt" : "2021-07-02T03:43:50Z",
+        "lastEditedBy" : "8be927c4-cfb4-4077-b355-f4f3d84849b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "99c4a0e2-d516-42b1-a6f5-ab48285cf0a9",
+        "parentId" : "88c71283-0fea-4b4e-a9dc-ef6184c55c4d",
+        "authorId" : "5821ed6f-e2e0-442e-9f8e-43ab7b9f2738",
+        "body" : "I tried logging the warning in the providers' `init()` functions, but it turns out that's too early -- klog has not yet been initialized at that point, so the log level hasn't been set yet which means the the log never gets printed even with `--v=4`. I ended up using a `sync.Once` to avoid logging it repeatedly which feels a little clunky but works.",
+        "createdAt" : "2021-07-16T22:17:47Z",
+        "updatedAt" : "2021-07-16T22:17:47Z",
+        "lastEditedBy" : "5821ed6f-e2e0-442e-9f8e-43ab7b9f2738",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "a947c32783e9027922762d6f76f5c27926f9bc0a",
+    "line" : 22,
+    "diffHunk" : "@@ -1,1 +55,59 @@// NewDockerKeyring creates a DockerKeyring to use for resolving credentials,\n// which draws from the set of registered credential providers.\nfunc NewDockerKeyring() DockerKeyring {\n\tkeyring := &providersDockerKeyring{\n\t\tProviders: make([]DockerConfigProvider, 0),"
   }
 ]
