@@ -889,5 +889,27 @@
     "commit" : "dd2a8127a554c0ec823c4966b18858cda73c0acf",
     "line" : 40,
     "diffHunk" : "@@ -1,1 +225,229 @@\tgo func() {\n\t\t<-stopCh\n\t\tclose(internalStopCh)\n\t}()\n"
+  },
+  {
+    "id" : "21ed995c-2b5c-4708-9c7a-44fc13c454f1",
+    "prId" : 101257,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/101257#pullrequestreview-709586789",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "7c6cd889-66e5-44a3-b43a-9525b40475eb",
+        "parentId" : null,
+        "authorId" : "13c01cb8-6052-4a98-b6fd-20d3acd6332f",
+        "body" : "the long-running connections should have a chance to terminate gracefully.\r\nwith `shutdownTimeout = 2 * time.Second` this is impossible.",
+        "createdAt" : "2021-07-19T14:02:49Z",
+        "updatedAt" : "2021-07-19T14:02:49Z",
+        "lastEditedBy" : "13c01cb8-6052-4a98-b6fd-20d3acd6332f",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "3182b69e970bd1fd036ff839fdf811f14e790244",
+    "line" : 32,
+    "diffHunk" : "@@ -1,1 +373,377 @@\t\t//   we should wait for a minimum of 2s\n\t\tstopHttpServerCh = drainedCh.Signaled()\n\t\tshutdownTimeout = 2 * time.Second\n\t\tklog.V(1).InfoS(\"[graceful-termination] using HTTP Server shutdown timeout\", \"ShutdownTimeout\", shutdownTimeout)\n\t}"
   }
 ]

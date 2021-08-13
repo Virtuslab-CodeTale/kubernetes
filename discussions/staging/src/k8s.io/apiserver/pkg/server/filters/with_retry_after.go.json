@@ -1,0 +1,123 @@
+[
+  {
+    "id" : "725fa0f6-aa18-490f-89b3-de302e338e14",
+    "prId" : 101257,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/101257#pullrequestreview-726544492",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "a3a9dd8c-eccf-48b6-893b-c06634f3d15c",
+        "parentId" : null,
+        "authorId" : "13c01cb8-6052-4a98-b6fd-20d3acd6332f",
+        "body" : "This filter changes the status code previously returned on paths like `livez` and `readyz` previously the server replied with `500` now with `429`. Again this might be not a backward compatible change/behavior.",
+        "createdAt" : "2021-07-02T08:54:29Z",
+        "updatedAt" : "2021-07-02T08:55:58Z",
+        "lastEditedBy" : "13c01cb8-6052-4a98-b6fd-20d3acd6332f",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "f9db259d-9de3-4773-a6ff-e977160d6777",
+        "parentId" : "a3a9dd8c-eccf-48b6-893b-c06634f3d15c",
+        "authorId" : "13c01cb8-6052-4a98-b6fd-20d3acd6332f",
+        "body" : "We might actually allow some actors to get through like `the loopback client`. Otherwise, the server might not shut down gracefully.",
+        "createdAt" : "2021-07-02T08:57:46Z",
+        "updatedAt" : "2021-07-02T08:57:46Z",
+        "lastEditedBy" : "13c01cb8-6052-4a98-b6fd-20d3acd6332f",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "82e89402-ec21-49a3-9291-0b45e65f8f3b",
+        "parentId" : "a3a9dd8c-eccf-48b6-893b-c06634f3d15c",
+        "authorId" : "f0985d19-4073-49b4-832a-0b89b15a1431",
+        "body" : "readyz/livez/healthyz/metrics definitely should not change ",
+        "createdAt" : "2021-07-02T12:34:22Z",
+        "updatedAt" : "2021-07-02T12:34:22Z",
+        "lastEditedBy" : "f0985d19-4073-49b4-832a-0b89b15a1431",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "620cfdef-21c1-484d-b085-132d94c401a7",
+        "parentId" : "a3a9dd8c-eccf-48b6-893b-c06634f3d15c",
+        "authorId" : "f0985d19-4073-49b4-832a-0b89b15a1431",
+        "body" : "+1 for loopback client",
+        "createdAt" : "2021-07-02T12:34:40Z",
+        "updatedAt" : "2021-07-02T12:34:40Z",
+        "lastEditedBy" : "f0985d19-4073-49b4-832a-0b89b15a1431",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "e660d8f2-b54d-4ba4-a8d6-c54af8cb5ae3",
+        "parentId" : "a3a9dd8c-eccf-48b6-893b-c06634f3d15c",
+        "authorId" : "13c01cb8-6052-4a98-b6fd-20d3acd6332f",
+        "body" : "I updated the filter to check the path and the user, PTAL https://github.com/kubernetes/kubernetes/pull/103357",
+        "createdAt" : "2021-07-06T15:43:51Z",
+        "updatedAt" : "2021-07-06T15:43:51Z",
+        "lastEditedBy" : "13c01cb8-6052-4a98-b6fd-20d3acd6332f",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "e5512754-bb55-498b-9a14-ae1a9019c163",
+        "parentId" : "a3a9dd8c-eccf-48b6-893b-c06634f3d15c",
+        "authorId" : "f0985d19-4073-49b4-832a-0b89b15a1431",
+        "body" : "the `shutdownDelayDurationElapsedCh` is a detail of the caller, not the func. Would call the func `WithRetryAfterDuringShutdown(handler, shutdownCh)`. Then it is understandable without context.",
+        "createdAt" : "2021-08-10T14:53:50Z",
+        "updatedAt" : "2021-08-10T14:53:51Z",
+        "lastEditedBy" : "f0985d19-4073-49b4-832a-0b89b15a1431",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "3182b69e970bd1fd036ff839fdf811f14e790244",
+    "line" : 65,
+    "diffHunk" : "@@ -1,1 +63,67 @@//\n// TODO: is there a way to merge WithWaitGroup and this filter?\nfunc WithRetryAfter(handler http.Handler, shutdownDelayDurationElapsedCh <-chan struct{}) http.Handler {\n\tshutdownRetryAfterParams := &retryAfterParams{\n\t\tTearDownConnection: true,"
+  },
+  {
+    "id" : "0fe0f03e-1793-4eca-9afd-f3952ecce8d5",
+    "prId" : 101257,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/101257#pullrequestreview-706499731",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "5b975255-2306-4add-8693-4ff1caf5d4a6",
+        "parentId" : null,
+        "authorId" : "13c01cb8-6052-4a98-b6fd-20d3acd6332f",
+        "body" : "I think that it will keep the `drained` queue busy and will block the server from shutting down, am I right?",
+        "createdAt" : "2021-07-14T09:10:13Z",
+        "updatedAt" : "2021-07-14T09:10:13Z",
+        "lastEditedBy" : "13c01cb8-6052-4a98-b6fd-20d3acd6332f",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "60d16bac-e324-410e-9240-abce21568cce",
+        "parentId" : "5b975255-2306-4add-8693-4ff1caf5d4a6",
+        "authorId" : "f0985d19-4073-49b4-832a-0b89b15a1431",
+        "body" : "we can exlucde them from the wait group too",
+        "createdAt" : "2021-07-14T09:44:44Z",
+        "updatedAt" : "2021-07-14T09:44:44Z",
+        "lastEditedBy" : "f0985d19-4073-49b4-832a-0b89b15a1431",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "1c06ec46-b61a-4c15-831d-a0efd5e1b662",
+        "parentId" : "5b975255-2306-4add-8693-4ff1caf5d4a6",
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "yeah, for now using the same exclude function in `WithWaitGroup`, I have left a todo to merge these two filters in the future.",
+        "createdAt" : "2021-07-14T16:44:37Z",
+        "updatedAt" : "2021-07-14T16:44:37Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "3182b69e970bd1fd036ff839fdf811f14e790244",
+    "line" : 87,
+    "diffHunk" : "@@ -1,1 +85,89 @@\t\tparams, send := shouldRespondWithRetryAfterFn()\n\t\tif !send || isRequestExemptFn(req) {\n\t\t\thandler.ServeHTTP(w, req)\n\t\t\treturn\n\t\t}"
+  }
+]
