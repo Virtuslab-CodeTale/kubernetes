@@ -1,0 +1,46 @@
+[
+  {
+    "id" : "761aa30a-bb55-4fea-9f13-717abf7ef200",
+    "prId" : 104002,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104002#pullrequestreview-725860441",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "05d02198-0e87-4a2a-ae4c-7ed8fcd56c4c",
+        "parentId" : null,
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "is there any reason why we are making it generic using `interface{}`? if i am not mistaken we are using it for `requestDecision` only, so we could make it more strictly typed - `Get() requestDecision`. This way we can avoid code snippets like this now:\r\n```\r\n\tdecisionAny := req.decision.Get()\r\n\tdecision, isDecision := decisionAny.(requestDecision)\r\n\tif !isDecision {\r\n\t\tpanic(fmt.Sprintf(\"QS(%s): Impossible decision %#+v (of type %T) for request %#+v %#+v\", qs.qCfg.Name, decisionAny, decisionAny, req.descr1, req.descr2))\r\n\t}\r\n```\r\n\r\nIf we are making it generic for future purposes, then I would say we can refactor and make it more generic when we need to in the future.\r\n",
+        "createdAt" : "2021-08-09T15:55:44Z",
+        "updatedAt" : "2021-08-09T17:12:53Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "97506342-9ad7-4c91-9c54-d360af2a978a",
+        "parentId" : "05d02198-0e87-4a2a-ae4c-7ed8fcd56c4c",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "Yes, I made it generic because the concept is generic.",
+        "createdAt" : "2021-08-09T20:11:52Z",
+        "updatedAt" : "2021-08-09T20:11:52Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "18130238-fd37-4f16-9b17-aa796386e3e6",
+        "parentId" : "05d02198-0e87-4a2a-ae4c-7ed8fcd56c4c",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "If you don't mind, I would prefer to keep it obviously generic.\r\nI realized that there are other panics in `queueset.go`, so I revised to get rid of all of them.",
+        "createdAt" : "2021-08-09T22:26:17Z",
+        "updatedAt" : "2021-08-09T22:26:17Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "1db36ae3b30e30d70972998a22987a7db470479b",
+    "line" : 12,
+    "diffHunk" : "@@ -1,1 +24,28 @@\t// variable is not set yet then this call blocks until this\n\t// variable gets a value.\n\tGet() interface{}\n\n\t// Set normally writes a value into this variable, unblocks every"
+  }
+]

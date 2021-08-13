@@ -1087,5 +1087,159 @@
     "commit" : "c79a0a08828ef86e07941e96dafefb7d8bc51990",
     "line" : 67,
     "diffHunk" : "@@ -1,1 +477,481 @@\tqs.dealer.Deal(hashValue, func(queueIdx int) {\n\t\t// TODO: Consider taking into account `additional latency` of requests\n\t\t// in addition to their seats.\n\t\t// Ideally, this should be based on projected completion time in the\n\t\t// virtual world of the youngest request in the queue."
+  },
+  {
+    "id" : "07bd586a-c9ab-42ed-9458-c5cf6116c6ab",
+    "prId" : 103830,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103830#pullrequestreview-714097290",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "7c35ab08-d268-4c82-8c7d-97908144bf2a",
+        "parentId" : null,
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "@MikeSpreitzer i can build https://github.com/kubernetes/kubernetes/pull/103829 on top of this PR so queueset uses `EventClock`, unless you are already working on it.\r\n",
+        "createdAt" : "2021-07-23T17:00:10Z",
+        "updatedAt" : "2021-07-23T17:00:25Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "d251a845-3b17-43c7-9804-5da6ffca3f22",
+        "parentId" : "7c35ab08-d268-4c82-8c7d-97908144bf2a",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "Please go ahead, I was hoping you would.",
+        "createdAt" : "2021-07-23T17:53:02Z",
+        "updatedAt" : "2021-07-23T17:53:02Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "86e6598a-2f38-4ae2-b3b0-f0130b5f239c",
+        "parentId" : "7c35ab08-d268-4c82-8c7d-97908144bf2a",
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "sounds good, once this PR merges, I will go ahead and rework https://github.com/kubernetes/kubernetes/pull/103829 to use `EventClock` for queuset implementation.",
+        "createdAt" : "2021-07-23T20:14:24Z",
+        "updatedAt" : "2021-07-23T20:14:24Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "dcb298c9552de44e27ed52f5e2b58a0dd7cd8d54",
+    "line" : 19,
+    "diffHunk" : "@@ -1,1 +40,44 @@\t// See https://kubernetes.slack.com/archives/C0EG7JC6T/p1626985671458800?thread_ts=1626983387.450800&cid=C0EG7JC6T\n\t// The need for this hack will be removed when we make queueset use an EventClock rather than a PassiveClock.\n\t_ \"k8s.io/utils/clock/testing\"\n)\n"
+  },
+  {
+    "id" : "08598898-8c50-4e13-8363-bf8f7c87dbd4",
+    "prId" : 104002,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104002#pullrequestreview-725080405",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "aedeb296-3ca3-4845-899e-8c08828bf8fb",
+        "parentId" : null,
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "How about just calling them:\r\n\r\npromiseMaker and promiseMakerFactory ?",
+        "createdAt" : "2021-08-05T10:34:35Z",
+        "updatedAt" : "2021-08-05T10:37:38Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "c998fc7f-7cba-4566-ad68-f51f5120ce26",
+        "parentId" : "aedeb296-3ca3-4845-899e-8c08828bf8fb",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "I put \"queueSet\" into the names because they are semantically specific to a queueSet.",
+        "createdAt" : "2021-08-05T14:31:41Z",
+        "updatedAt" : "2021-08-05T14:31:41Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "729b08ec-5e40-48c3-ba11-a9b0ebf4bbb3",
+        "parentId" : "aedeb296-3ca3-4845-899e-8c08828bf8fb",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "The words \"factory\" and \"maker\" are interchangeable here, they both mean the same thing: \"FooMaker\" is a func that returns a Foo, just like \"FooFactory\".  Using both words suggests they mean something different --- which they do not.",
+        "createdAt" : "2021-08-05T15:00:46Z",
+        "updatedAt" : "2021-08-05T15:00:46Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "d7362a66-d959-44aa-99ef-49a0a3c4496f",
+        "parentId" : "aedeb296-3ca3-4845-899e-8c08828bf8fb",
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "> I put \"queueSet\" into the names because they are semantically specific to a queueSet.\r\n\r\nThey are in queueset package already. So either they are used within this package (which is then obvious they are package specific) or they are used outside and have to be used as queueset.<type>. \r\nWe can remove queueset without loosing the package-specific nature.\r\n\r\n> The words \"factory\" and \"maker\" are interchangeable here, they both mean the same thing: \"FooMaker\"\r\n\r\nSo let's change both to Factory - I'm not just not a fan of maker. Factory is the word we use everywhere.",
+        "createdAt" : "2021-08-06T07:32:11Z",
+        "updatedAt" : "2021-08-06T07:50:35Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "34752dd0-ebcb-42bd-9a57-aae2decaecec",
+        "parentId" : "aedeb296-3ca3-4845-899e-8c08828bf8fb",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "done",
+        "createdAt" : "2021-08-06T21:57:21Z",
+        "updatedAt" : "2021-08-06T21:57:21Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "6df8c140-e218-4241-bfc8-7fbe68c60506",
+        "parentId" : "aedeb296-3ca3-4845-899e-8c08828bf8fb",
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "Thanks!",
+        "createdAt" : "2021-08-09T07:17:10Z",
+        "updatedAt" : "2021-08-09T07:17:10Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "1db36ae3b30e30d70972998a22987a7db470479b",
+    "line" : 26,
+    "diffHunk" : "@@ -1,1 +55,59 @@// promiseFactoryFactory returns the promiseFactory to use for the given queueSet\ntype promiseFactoryFactory func(*queueSet) promiseFactory\n\n// `*queueSetCompleter` implements QueueSetCompleter.  Exactly one of\n// the fields `factory` and `theSet` is non-nil."
+  },
+  {
+    "id" : "1c85fc86-3273-4271-8c94-65db8e3b6fbe",
+    "prId" : 104002,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104002#pullrequestreview-726516566",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "142d948c-a340-48e4-94f4-348cb36b4387",
+        "parentId" : null,
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "instead of this - let's return in line 354 - it would be cleaner and this would be no-op change to put it there.",
+        "createdAt" : "2021-08-10T06:26:37Z",
+        "updatedAt" : "2021-08-10T06:32:53Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "a9bede5f-2fe7-42f8-86ab-392489504372",
+        "parentId" : "142d948c-a340-48e4-94f4-348cb36b4387",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "Done.\r\nIt is a behavioral change, but one with no clear right answer in disallowed situtation.",
+        "createdAt" : "2021-08-10T14:31:30Z",
+        "updatedAt" : "2021-08-10T14:31:46Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "1db36ae3b30e30d70972998a22987a7db470479b",
+    "line" : 173,
+    "diffHunk" : "@@ -1,1 +352,356 @@\t\t// call Wait twice on the same request\n\t\tklog.Errorf(\"Duplicate call to the Wait method!  Immediately returning execute=false.  QueueSet=%s, startTime=%s, descr1=%#+v, descr2=%#+v\", req.qs.qCfg.Name, req.startTime, req.descr1, req.descr2)\n\t\treturn false, qs.isIdleLocked()\n\t}\n\treq.waitStarted = true"
   }
 ]

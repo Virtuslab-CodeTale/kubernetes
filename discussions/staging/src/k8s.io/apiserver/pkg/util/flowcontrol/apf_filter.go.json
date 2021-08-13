@@ -130,5 +130,71 @@
     "commit" : "c2a3b793d3ec62e781dd20704370d09f7e1be706",
     "line" : 13,
     "diffHunk" : "@@ -1,1 +30,34 @@\tkubeinformers \"k8s.io/client-go/informers\"\n\t\"k8s.io/klog/v2\"\n\tutilclock \"k8s.io/utils/clock\"\n\n\tflowcontrol \"k8s.io/api/flowcontrol/v1beta1\""
+  },
+  {
+    "id" : "81810233-b8ed-4e4e-af58-d16a436e640c",
+    "prId" : 103829,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/103829#pullrequestreview-724386237",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "2154c876-c283-4ed1-b362-71bfa715bc98",
+        "parentId" : null,
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "I wouldn't bother to rename this import, let it be known as \"clock\".  We are trying to move everything that was using `k8s.io/apimachinery/pkg/util/clock` to `k8s.io/utils/clock` so that we can retire `k8s.io/apimachinery/pkg/util/clock`.",
+        "createdAt" : "2021-08-05T22:16:19Z",
+        "updatedAt" : "2021-08-05T22:16:19Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "58c79c36-c441-4540-a197-40a0a86d461e",
+        "parentId" : "2154c876-c283-4ed1-b362-71bfa715bc98",
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "we have two clock packages being used here - `fairqueuing` and `utils`, so the prefix makes it more explicit, but i am fine either way.",
+        "createdAt" : "2021-08-05T22:25:05Z",
+        "updatedAt" : "2021-08-05T22:25:53Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "c7fc7f65-bbfa-4527-882b-e57334a78e66",
+        "parentId" : "2154c876-c283-4ed1-b362-71bfa715bc98",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "`k8s.io/utils/clock` is the base clock package.  `k8s.io/apiserver/pkg/util/flowcontrol/fairqueuing/clock` builds on that, adding `EventClock`.  Now that I think of it, it would be better if the latter were `k8s.io/apiserver/pkg/util/flowcontrol/fairqueuing/eventclock`.",
+        "createdAt" : "2021-08-06T03:04:39Z",
+        "updatedAt" : "2021-08-06T03:04:39Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "e8005dd5-1c6c-45c4-94d3-872456abbd98",
+        "parentId" : "2154c876-c283-4ed1-b362-71bfa715bc98",
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "@MikeSpreitzer  yes, i agree, `eventclock` is a better name - can we merge this PR? I am happy to open a separate PR with the rename. \r\n",
+        "createdAt" : "2021-08-06T13:56:43Z",
+        "updatedAt" : "2021-08-06T13:56:43Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "24c7506a-e83f-481b-9ffb-1fe3307b4d3b",
+        "parentId" : "2154c876-c283-4ed1-b362-71bfa715bc98",
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "Mike already have one opened.",
+        "createdAt" : "2021-08-06T13:57:30Z",
+        "updatedAt" : "2021-08-06T13:57:30Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "c2a3b793d3ec62e781dd20704370d09f7e1be706",
+    "line" : 13,
+    "diffHunk" : "@@ -1,1 +30,34 @@\tkubeinformers \"k8s.io/client-go/informers\"\n\t\"k8s.io/klog/v2\"\n\tutilclock \"k8s.io/utils/clock\"\n\n\tflowcontrol \"k8s.io/api/flowcontrol/v1beta1\""
   }
 ]

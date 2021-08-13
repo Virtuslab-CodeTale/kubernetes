@@ -295,5 +295,82 @@
     "commit" : "d68186452d9150b113489e6a722caf82f898857f",
     "line" : 58,
     "diffHunk" : "@@ -1,1 +1048,1052 @@\t\t\tqs.finishRequestLocked(r)\n\n\t\t\t// as soon as AdditionalLatency elapses we expect the seats to be released\n\t\t\tclk.SetTime(now.Add(test.workEstimate.AdditionalLatency))\n"
+  },
+  {
+    "id" : "d544da3c-8b08-408c-a543-bd885052c002",
+    "prId" : 104002,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104002#pullrequestreview-724733961",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "1fdce08c-1524-4978-95cb-944675bf1600",
+        "parentId" : null,
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "IIUC, you need to lock here to avoid concurrent t.Errorf() calls.\r\n\r\nGiven you need it, let's remove the expecteQNCounts() function above and use just this one.",
+        "createdAt" : "2021-08-06T07:42:40Z",
+        "updatedAt" : "2021-08-06T07:50:35Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "493bc7a9-bec2-48b3-9d75-cb2f70ea5492",
+        "parentId" : "1fdce08c-1524-4978-95cb-944675bf1600",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "done",
+        "createdAt" : "2021-08-06T21:58:02Z",
+        "updatedAt" : "2021-08-06T21:58:03Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "1db36ae3b30e30d70972998a22987a7db470479b",
+    "line" : 165,
+    "diffHunk" : "@@ -1,1 +692,696 @@\t\t\terrsLock.Lock()\n\t\t\tdefer errsLock.Unlock()\n\t\t\tfatalErrs = append(fatalErrs, fmt.Sprintf(\"Got %d calls to queueNoteFn%d(%v), expected %d\", a, fn, inQueue, expect))\n\t\t}\n\t}"
+  },
+  {
+    "id" : "3699b66f-c6fd-4d8c-acb8-60d3021749c8",
+    "prId" : 104002,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104002#pullrequestreview-726045426",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "cd0181dd-572b-477e-8f84-0da972a021ce",
+        "parentId" : null,
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "let's remove idle1 from here and define it as it was",
+        "createdAt" : "2021-08-09T07:42:03Z",
+        "updatedAt" : "2021-08-09T08:07:22Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "b8caa811-3cb7-4a26-87e7-ce49df6d241f",
+        "parentId" : "cd0181dd-572b-477e-8f84-0da972a021ce",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "I think I need to define the variable up front, it is set in a forked goroutine and checked in the main goroutine.  The request processing needs to be in a forked goroutine so that it can run concurrently with the doneCh reaction under management of the fake clock.",
+        "createdAt" : "2021-08-09T22:11:21Z",
+        "updatedAt" : "2021-08-09T22:11:21Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "ed082541-3e77-4d99-b016-8853d1f59e51",
+        "parentId" : "cd0181dd-572b-477e-8f84-0da972a021ce",
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "Sorry - I missed that it's being exercised at the end of the test.",
+        "createdAt" : "2021-08-10T06:29:12Z",
+        "updatedAt" : "2021-08-10T06:32:53Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "1db36ae3b30e30d70972998a22987a7db470479b",
+    "line" : 196,
+    "diffHunk" : "@@ -1,1 +705,709 @@\t}\n\texpectQNCounts(1, 1, 1)\n\tvar executed1, idle1 bool\n\tcounter.Add(1) // account for the following goroutine\n\tgo func() {"
   }
 ]

@@ -1,0 +1,101 @@
+[
+  {
+    "id" : "78521413-353d-43e1-b8a1-5d6376653dc4",
+    "prId" : 104002,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104002#pullrequestreview-725548714",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "2dcd6681-df5e-4683-9b09-fb907e9c95d2",
+        "parentId" : null,
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "If I am not mistaken, a `promise` is much more than a \"write once\" getter/setter. do we need to call it promise, how about   `requestDecesionWriteOnce` or something along those lines?",
+        "createdAt" : "2021-08-09T16:01:11Z",
+        "updatedAt" : "2021-08-09T17:12:53Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "1db36ae3b30e30d70972998a22987a7db470479b",
+    "line" : 15,
+    "diffHunk" : "@@ -1,1 +22,26 @@\n// promise implements the WriteOnce interface.\ntype promise struct {\n\tdoneCh  <-chan struct{}\n\tdoneVal interface{}"
+  },
+  {
+    "id" : "4668b05f-97ae-403f-bd3e-6a783560f5b5",
+    "prId" : 104002,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104002#pullrequestreview-725769733",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "0b0906d1-6e00-40fd-8b4f-c90d9d57725c",
+        "parentId" : null,
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "in production code, we don't have a use case for setting the value up front - so i would recommend \r\n```\r\nNewWriteOnce(doneCh <-chan struct{}, doneVal interface{}) WriteOnce\r\n```\r\n\r\nfor test, we can have a private function `newWriteOnce` that accepts `initial interface{}` as a parameter. ",
+        "createdAt" : "2021-08-09T16:07:25Z",
+        "updatedAt" : "2021-08-09T17:12:53Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "d22761d8-152a-4cc8-ba8a-ebdd8a4784cb",
+        "parentId" : "0b0906d1-6e00-40fd-8b4f-c90d9d57725c",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "Setting it up front _is_ in the regular code, in the code path for a priority level that does no queuing.",
+        "createdAt" : "2021-08-09T20:13:31Z",
+        "updatedAt" : "2021-08-09T20:42:57Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "1db36ae3b30e30d70972998a22987a7db470479b",
+    "line" : 42,
+    "diffHunk" : "@@ -1,1 +39,43 @@// never happens for the nil channel) then `Set(doneVal)` effectively\n// happens at that time.\nfunc NewWriteOnce(initial interface{}, doneCh <-chan struct{}, doneVal interface{}) WriteOnce {\n\tp := &promise{\n\t\tdoneCh:  doneCh,"
+  },
+  {
+    "id" : "a67c5f5b-7c5b-4edc-928b-54ed35abd44e",
+    "prId" : 104002,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104002#pullrequestreview-725674646",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "289bf06c-eecb-4c59-ad3e-51f023594759",
+        "parentId" : null,
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "nit: alternatively we can use:\r\n```\r\nfunc (p *promise) Set(value interface{}) bool {\r\nselect {\r\n\tcase <-p.setCh:\r\n\t\t// already closed,\r\n               return false\r\n\tdefault:\r\n\t   p.value = value\t\r\n           close(p.setCh)\r\n          return true\r\n\t}\r\n}\r\n```\r\nand avoid having `once` as a member variable.\r\n",
+        "createdAt" : "2021-08-09T16:13:36Z",
+        "updatedAt" : "2021-08-09T17:16:02Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "03297ec6-4cf0-4fd4-92ef-d82ef750c004",
+        "parentId" : "289bf06c-eecb-4c59-ad3e-51f023594759",
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "This doesn't protect you from the race if there are two concurrent calls to Set()",
+        "createdAt" : "2021-08-09T18:05:53Z",
+        "updatedAt" : "2021-08-09T18:05:53Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "51222db9-7956-4541-a548-e8b7dcfe3fe5",
+        "parentId" : "289bf06c-eecb-4c59-ad3e-51f023594759",
+        "authorId" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "body" : "oh yes, right - ignore my comment.",
+        "createdAt" : "2021-08-09T18:14:34Z",
+        "updatedAt" : "2021-08-09T18:14:34Z",
+        "lastEditedBy" : "3e6e337f-0beb-4609-abc3-11b8e8cf5688",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "1db36ae3b30e30d70972998a22987a7db470479b",
+    "line" : 84,
+    "diffHunk" : "@@ -1,1 +62,66 @@func (p *promise) Set(value interface{}) bool {\n\tvar ans bool\n\tp.onceler.Do(func() {\n\t\tp.value = value\n\t\tclose(p.setCh)"
+  }
+]

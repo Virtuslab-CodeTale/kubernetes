@@ -1,0 +1,68 @@
+[
+  {
+    "id" : "351e203d-8f92-4c66-8400-f9978eefa18c",
+    "prId" : 104030,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104030#pullrequestreview-726051407",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "36648029-18ea-498b-9251-9bcf11f78aed",
+        "parentId" : null,
+        "authorId" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "body" : "Do we need this to be an interface? It doesn't look like it.",
+        "createdAt" : "2021-08-09T13:54:32Z",
+        "updatedAt" : "2021-08-09T14:06:23Z",
+        "lastEditedBy" : "31fbce73-ef64-43f8-9faa-047479d8fc32",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "f2fca3a6-b522-4d79-bb49-3d09ad1d678a",
+        "parentId" : "36648029-18ea-498b-9251-9bcf11f78aed",
+        "authorId" : "1fde46ca-8fae-4b82-9978-f266fdae6ffe",
+        "body" : "Just copied, I also cannot see the necessity of this interface, I will take care of this as a follow up.",
+        "createdAt" : "2021-08-10T06:29:33Z",
+        "updatedAt" : "2021-08-10T06:29:34Z",
+        "lastEditedBy" : "1fde46ca-8fae-4b82-9978-f266fdae6ffe",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "3af26bae2c368e0b5a78802412231f3d1ecb51ff",
+    "line" : 42,
+    "diffHunk" : "@@ -1,1 +40,44 @@// Candidate represents a nominated node on which the preemptor can be scheduled,\n// along with the list of victims that should be evicted for the preemptor to fit the node.\ntype Candidate interface {\n\t// Victims wraps a list of to-be-preempted Pods and the number of PDB violation.\n\tVictims() *extenderv1.Victims"
+  },
+  {
+    "id" : "bbaa120a-de55-47f3-a3ce-3d056224804c",
+    "prId" : 104030,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104030#pullrequestreview-726051935",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "8d16ae6b-e8ab-4faf-8473-19a15464b419",
+        "parentId" : null,
+        "authorId" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "body" : "Add a comment to highlight that `state` and `nodeInfo` are deep copied.",
+        "createdAt" : "2021-08-09T18:26:11Z",
+        "updatedAt" : "2021-08-09T18:28:33Z",
+        "lastEditedBy" : "06cbf859-1cac-4be7-80e6-3b34dcff1812",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "4a3c7bdd-e3bd-4bfa-be51-6b8f73312804",
+        "parentId" : "8d16ae6b-e8ab-4faf-8473-19a15464b419",
+        "authorId" : "1fde46ca-8fae-4b82-9978-f266fdae6ffe",
+        "body" : "Done",
+        "createdAt" : "2021-08-10T06:30:21Z",
+        "updatedAt" : "2021-08-10T06:30:22Z",
+        "lastEditedBy" : "1fde46ca-8fae-4b82-9978-f266fdae6ffe",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "3af26bae2c368e0b5a78802412231f3d1ecb51ff",
+    "line" : 110,
+    "diffHunk" : "@@ -1,1 +108,112 @@\tPodEligibleToPreemptOthers(pod *v1.Pod, nominatedNodeStatus *framework.Status) bool\n\t// SelectVictimsOnNode finds minimum set of pods on the given node that should be preempted in order to make enough room\n\t// for \"pod\" to be scheduled.\n\t// Note that both `state` and `nodeInfo` are deep copied.\n\tSelectVictimsOnNode(ctx context.Context, state *framework.CycleState,"
+  }
+]

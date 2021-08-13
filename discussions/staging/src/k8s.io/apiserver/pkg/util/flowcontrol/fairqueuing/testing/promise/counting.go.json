@@ -1,0 +1,57 @@
+[
+  {
+    "id" : "1b437e3b-8e6a-4fa8-9f3e-a7749ac0d54a",
+    "prId" : 104002,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104002#pullrequestreview-726443632",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "de3adf3d-ad65-4326-92f4-d6330bf2c18b",
+        "parentId" : null,
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "We can get rid of \"isSet\" field and in places where we check is check `p.value != nil` [you're making this assumption in line 60 anyway]",
+        "createdAt" : "2021-08-09T07:52:12Z",
+        "updatedAt" : "2021-08-09T08:07:22Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "1191d876-446b-45a8-851e-b8c1289a7df9",
+        "parentId" : "de3adf3d-ad65-4326-92f4-d6330bf2c18b",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "Recent edits have removed the distinct treatment of `nil` almost everywhere.  In particular, `Set(nil)` is now allowed.",
+        "createdAt" : "2021-08-09T21:49:57Z",
+        "updatedAt" : "2021-08-09T21:49:57Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "242a8183-2329-403e-a3ac-7730a9c0df22",
+        "parentId" : "de3adf3d-ad65-4326-92f4-d6330bf2c18b",
+        "authorId" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "body" : "It's still in line 62 [so you can't set nil as an initial value]\r\n\r\nThat said - it's only test code, so it's not that important.",
+        "createdAt" : "2021-08-10T06:31:38Z",
+        "updatedAt" : "2021-08-10T06:32:53Z",
+        "lastEditedBy" : "24302707-9254-48df-89a5-cbcc349462b8",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "0782d0c4-9101-4f66-9140-c09dc3f1b602",
+        "parentId" : "de3adf3d-ad65-4326-92f4-d6330bf2c18b",
+        "authorId" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "body" : "Yes, I said _almost_ everywhere.  There is currently no need to allow `nil` as an initial value.  If and when that arises, it can be addressed then.",
+        "createdAt" : "2021-08-10T13:34:06Z",
+        "updatedAt" : "2021-08-10T13:34:06Z",
+        "lastEditedBy" : "7a59a326-58b3-4590-b70a-297d2e27daa5",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "1db36ae3b30e30d70972998a22987a7db470479b",
+    "line" : 97,
+    "diffHunk" : "@@ -1,1 +95,99 @@\t\treturn false\n\t}\n\tp.isSet = true\n\tp.value = value\n\tif p.waitingCount > 0 {"
+  }
+]
