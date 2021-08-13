@@ -1,0 +1,35 @@
+[
+  {
+    "id" : "3ef97d4c-7ce2-4b7c-8826-ed103824c66a",
+    "prId" : 104284,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104284#pullrequestreview-727741866",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "1eac5898-eab1-4d8a-9199-b19bd874c621",
+        "parentId" : null,
+        "authorId" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "body" : "Like i've mentioned on the issue these file mask unit tests are broken on windows, since the OS simply does not have mode bits for files. Some of the go stdlib logic is no-op on windows. I think we cross compile the kubeadm binary for windows, but we never run unit tests on windows.\r\nIf we do, this change is accurate and probably more tests would fail in cmd/kubeadm.\r\n\r\nThanks\r\n/approve\r\n/triage accepted\r\n/priority backlog\r\n@pacoxu please apply LGTM given you were already reviewing.\r\n",
+        "createdAt" : "2021-08-11T10:53:49Z",
+        "updatedAt" : "2021-08-11T10:53:49Z",
+        "lastEditedBy" : "2ce2b44c-9841-49e7-983e-fb7696974908",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "774b0065-52fc-4698-a2db-ebacaf9ae083",
+        "parentId" : "1eac5898-eab1-4d8a-9199-b19bd874c621",
+        "authorId" : "46e1ba13-482b-4bcd-8fb1-be821bac3b04",
+        "body" : "Yeah, I think maybe some limited windows unit test running occurs, but not in CI or the release and I would be surprised if it didn't have many issues similar to https://github.com/kubernetes/kubernetes/issues/102607 already ...",
+        "createdAt" : "2021-08-11T17:13:24Z",
+        "updatedAt" : "2021-08-11T17:13:24Z",
+        "lastEditedBy" : "46e1ba13-482b-4bcd-8fb1-be821bac3b04",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "e6cb526f6bbc5fedba14c4b0676e5e2db3d95a35",
+    "line" : 21,
+    "diffHunk" : "@@ -1,1 +19,23 @@package copycerts\n\nfunc setNoUmask() {\n\t// no-op on not-unix\n}"
+  }
+]

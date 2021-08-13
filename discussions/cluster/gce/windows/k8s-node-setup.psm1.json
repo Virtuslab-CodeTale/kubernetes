@@ -1648,5 +1648,38 @@
     "commit" : "6d78f2b6668132e39b49fdf4ab5a8d0d65de2a56",
     "line" : 55,
     "diffHunk" : "@@ -1,1 +284,288 @@    # future Windows versions. For example, Windows Server 2019 does not\n    # support the nanoserver container\n    # (https://blogs.technet.microsoft.com/virtualization/2018/11/13/windows-server-2019-now-available/).\n    Log_NotImplemented \"Need to update Create-PauseImage for WS2019\"\n  }"
+  },
+  {
+    "id" : "aa441e53-b7f5-41db-a06b-e4c6caea7481",
+    "prId" : 104317,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104317#pullrequestreview-729021789",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "a22ee014-0a3d-468b-b18f-f6f5b04a9607",
+        "parentId" : null,
+        "authorId" : "84643be2-004e-4f49-9ab2-b32a1995bad6",
+        "body" : "It probably doesn't make any difference, but we [start](https://github.com/kubernetes/kubernetes/blob/cd426eaee6d4ceaaa434b1eca8cbf5c168305522/cluster/gce/windows/k8s-node-setup.psm1#L1261) the kubelet before the kube-proxy, so it would make more sense to reverse the order: stop + unregister kube-proxy, then kubelet.",
+        "createdAt" : "2021-08-12T18:29:34Z",
+        "updatedAt" : "2021-08-12T18:29:35Z",
+        "lastEditedBy" : "84643be2-004e-4f49-9ab2-b32a1995bad6",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "6d8ad9c4-f1f0-4a88-96a9-4ded7de7833d",
+        "parentId" : "a22ee014-0a3d-468b-b18f-f6f5b04a9607",
+        "authorId" : "76d89ff3-4607-4eb5-afa5-e142512c40fb",
+        "body" : "Reversed.",
+        "createdAt" : "2021-08-12T19:59:28Z",
+        "updatedAt" : "2021-08-12T19:59:29Z",
+        "lastEditedBy" : "76d89ff3-4607-4eb5-afa5-e142512c40fb",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "aa9380e017a491acb96b272210fbfd6ff0b27e09",
+    "line" : 6,
+    "diffHunk" : "@@ -1,1 +1289,1293 @@# Stop and unregister both kubelet & kube-proxy services.\nfunction Unregister-WorkerServices {\n  & sc.exe delete kube-proxy\n  & sc.exe delete kubelet\n}"
   }
 ]

@@ -273,5 +273,49 @@
     "commit" : "2c4d748bed735f33da89c0875fe472539e901209",
     "line" : 47,
     "diffHunk" : "@@ -1,1 +45,49 @@)\n\ntype subpath struct {\n\tmounter mount.Interface\n}"
+  },
+  {
+    "id" : "c4c98659-f71e-410f-b774-e0d7b0e065c7",
+    "prId" : 104253,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104253#pullrequestreview-726939870",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "913f04f3-1459-40bd-ab8e-4ec10c36bad6",
+        "parentId" : null,
+        "authorId" : "44594ff0-8fbc-44a7-84f9-654ffd54270f",
+        "body" : "do we want to set fstype here?",
+        "createdAt" : "2021-08-10T23:50:21Z",
+        "updatedAt" : "2021-08-10T23:50:22Z",
+        "lastEditedBy" : "44594ff0-8fbc-44a7-84f9-654ffd54270f",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "92c94d7e-b9e1-46a5-aa2c-a7264cbb9e76",
+        "parentId" : "913f04f3-1459-40bd-ab8e-4ec10c36bad6",
+        "authorId" : "44594ff0-8fbc-44a7-84f9-654ffd54270f",
+        "body" : "how about unmount, does it need to add flag?",
+        "createdAt" : "2021-08-10T23:56:43Z",
+        "updatedAt" : "2021-08-10T23:56:43Z",
+        "lastEditedBy" : "44594ff0-8fbc-44a7-84f9-654ffd54270f",
+        "tags" : [
+        ]
+      },
+      {
+        "id" : "977fde80-7160-44ea-9166-9d3b2c3555d6",
+        "parentId" : "913f04f3-1459-40bd-ab8e-4ec10c36bad6",
+        "authorId" : "209ee091-cf29-4efa-8a1b-a98334ea3f9a",
+        "body" : "when bind mounting, fstype is not needed",
+        "createdAt" : "2021-08-11T00:07:27Z",
+        "updatedAt" : "2021-08-11T00:07:27Z",
+        "lastEditedBy" : "209ee091-cf29-4efa-8a1b-a98334ea3f9a",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "08bec6da0fcf418f351f86c113620edc7be1849c",
+    "line" : 7,
+    "diffHunk" : "@@ -1,1 +212,216 @@\tmountFlags := []string{\"--no-canonicalize\"}\n\tklog.V(5).Infof(\"bind mounting %q at %q\", mountSource, bindPathTarget)\n\tif err = mounter.MountSensitiveWithoutSystemdWithMountFlags(mountSource, bindPathTarget, \"\" /*fstype*/, options, nil /* sensitiveOptions */, mountFlags); err != nil {\n\t\treturn \"\", fmt.Errorf(\"error mounting %s: %s\", subpath.Path, err)\n\t}"
   }
 ]
