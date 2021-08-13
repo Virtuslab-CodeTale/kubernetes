@@ -108,5 +108,27 @@
     "commit" : "36ae8fd91a66409546f4751bfaf36f67941abc8f",
     "line" : 118,
     "diffHunk" : "@@ -1,1 +116,120 @@\t}\n\tfor key, val := range newPodLabels {\n\t\tkubePod.Labels[key] = val\n\t}\n\t_, err = k8s.ClientSet.CoreV1().Pods(pod.Namespace).Update(context.TODO(), kubePod, metav1.UpdateOptions{})"
+  },
+  {
+    "id" : "019fd261-aafa-49c4-a69d-d04ae649d347",
+    "prId" : 104349,
+    "prUrl" : "https://github.com/kubernetes/kubernetes/pull/104349#pullrequestreview-729447415",
+    "prSource" : "GitHub",
+    "comments" : [
+      {
+        "id" : "74c18e92-a711-4391-b815-9b3b6c86e498",
+        "parentId" : null,
+        "authorId" : "13779685-87a1-45d2-907c-e13dd79f0984",
+        "body" : "I hope this makes sense",
+        "createdAt" : "2021-08-13T09:44:51Z",
+        "updatedAt" : "2021-08-13T09:44:51Z",
+        "lastEditedBy" : "13779685-87a1-45d2-907c-e13dd79f0984",
+        "tags" : [
+        ]
+      }
+    ],
+    "commit" : "e36a14730bdfa8f236626a5e117b0eb51dcb29c7",
+    "line" : 5,
+    "diffHunk" : "@@ -1,1 +70,74 @@func waitForHTTPServers(k *kubeManager, model *Model) error {\n\tconst maxTries = 10\n\tframework.Logf(\"waiting for HTTP servers (ports 80 and/or 81) to become ready\")\n\n\ttestCases := map[string]*TestCase{}"
   }
 ]
